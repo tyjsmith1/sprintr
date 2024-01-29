@@ -17,9 +17,10 @@ class User(db.Model, SerializerMixin):
     user_capacity = db.Column(db.Integer)
 
     #________RELATIONSHIPS________#
-    tickets = db.relationship("Ticket", back_populates="user")
-    ticket_logs = db.relationship("TicketLogs", back_populates="user")
-    ticket_contributors = db.relationship("TicketContributors", back_populates="user")
+    assigned_tickets = db.relationship("Ticket",foreign_keys="[Ticket.assignee_user_id]", back_populates="assignee")
+    authored_tickets = db.relationship("Ticket",foreign_keys="[Ticket.author_user_id]", back_populates="author")
+    ticket_logs = db.relationship("TicketLog", back_populates="user")
+    ticket_contributors = db.relationship("TicketContributor", back_populates="user")
 
     #________SERIAL________#
     serialize_rules = ('-tickets.user','-ticket_logs.user','-ticket_contributors.user', )
@@ -27,56 +28,7 @@ class User(db.Model, SerializerMixin):
     #________VALIDATIONS________#
 
     def __repr__(self):
-        return f'<Users: {self.id}, {self.username}, {self.role}>'
-    
-class Ticket(db.Model, SerializerMixin):
-    __tablename__ = "tickets"
-
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String, nullable=False)
-    status = db.Column(db.String, nullable=False)
-    category = db.Column(db.String, nullable=False)
-    body = db.Column(db.String, nullable=False)
-    urgency = db.Column(db.Integer, nullable=False)
-    story_points = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.Date, nullable=False)
-    ## Stretch goal -- maybe add an updated at to track updates
-    completed_at = db.Column(db.Date)
-    assignee_user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    author_user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    sprint_id = db.Column(db.Integer, db.ForeignKey("sprints.id"))
-
-    #________RELATIONSHIPS________#
-    user = db.relationship("User", back_populates="tickets")
-    sprint = db.relationship("Sprint", back_populates="tickets")
-    ticket_contributors = db.relationship("TicketContributor", back_populates="ticket")
-    ticket_logs = db.relationship("TicketLog", back_populates="ticket")
-
-    #________SERIAL________#
-    serialize_rules = ('-user.ticket','-sprint.ticket','-ticket_contributors.ticket','-ticket_logs.ticket',)
-
-    #________VALIDATIONS________#
-
-    def __repr__(self):
-        return f'<Tickets: {self.id}, {self.title}, {self.status}>'
-    
-class Sprint(db.Model, SerializerMixin):
-    __tablename__ = "sprints"
-
-    id = db.Column(db.Integer, primary_key=True)
-    start_date = db.Column(db.Date)
-    end_date = db.Column(db.Date)
-
-    #________RELATIONSHIPS________#
-    tickets = db.relationship("Ticket", back_populates="sprint")
-
-    #________SERIAL________#
-    serialize_rules = ('-tickets.sprint',)
-
-    #________VALIDATIONS________#
-
-    def __repr__(self):
-        return f'<Sprints: {self.id}, {self.start_date}, {self.end_date}>'
+        return f'<Users: {self.username}, {self.role}>'
     
     
 class TicketLog(db.Model, SerializerMixin):
@@ -100,10 +52,31 @@ class TicketLog(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<TicketLogs: {self.ticket_id}, {self.author_user_id}, {self.comment_text}, {self.created_at}>'
+
+class Sprint(db.Model, SerializerMixin):
+    __tablename__ = "sprints"
+
+    id = db.Column(db.Integer, primary_key=True)
+    start_date = db.Column(db.Date)
+    end_date = db.Column(db.Date)
+
+    #________RELATIONSHIPS________#
+    tickets = db.relationship("Ticket", back_populates="sprint")
+
+    #________SERIAL________#
+    serialize_rules = ('-tickets.sprint',)
+
+    #________VALIDATIONS________#
+
+    def __repr__(self):
+        return f'<Sprints: {self.id}, {self.start_date}, {self.end_date}>'
+    
+    
     
 class TicketContributor(db.Model, SerializerMixin):
     __tablename__ = "ticket_contributors"
 
+    id = db.Column(db.Integer, primary_key=True)
     ticket_id = db.Column(db.Integer, db.ForeignKey("tickets.id"))
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
@@ -118,3 +91,35 @@ class TicketContributor(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<TicketContributors: {self.ticket_id}, {self.user_id}>'
+
+class Ticket(db.Model, SerializerMixin):
+    __tablename__ = "tickets"
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    status = db.Column(db.String, nullable=False)
+    category = db.Column(db.String, nullable=False)
+    body = db.Column(db.String, nullable=False)
+    urgency = db.Column(db.Integer, nullable=False)
+    story_points = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.Date, nullable=False)
+    ## Stretch goal -- maybe add an updated at to track updates
+    completed_at = db.Column(db.Date)
+    assignee_user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    author_user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    sprint_id = db.Column(db.Integer, db.ForeignKey("sprints.id"))
+
+    #________RELATIONSHIPS________#
+    assignee = db.relationship("User",foreign_keys=[assignee_user_id], back_populates="assigned_tickets")
+    author = db.relationship("User",foreign_keys=[author_user_id],back_populates="authored_tickets")
+    sprint = db.relationship("Sprint", back_populates="tickets")
+    ticket_contributors = db.relationship("TicketContributor", back_populates="ticket")
+    ticket_logs = db.relationship("TicketLog", back_populates="ticket")
+
+    #________SERIAL________#
+    serialize_rules = ('-user.ticket','-sprint.ticket','-ticket_contributors.ticket','-ticket_logs.ticket',)
+
+    #________VALIDATIONS________#
+
+    def __repr__(self):
+        return f'<Tickets: {self.id}, {self.title}, {self.status}>'
