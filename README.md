@@ -6,7 +6,10 @@ Welcome to Sprintr, an innovative agile project management tool designed to stre
 tbd
 
 ## User Stories
-tbd
+- As a team member (technical or non-technical), I should be able to submit a ticket for a bug.
+- As an engineer, I should be able to view tickets assigned to me for completion
+- As a laeder of the team, I should be able to create tasks for strategic initiatives in addition to bugs
+- As a scrum master, I should be able to rely on the app to assign trivial tasks to engineers with capacity to cut down time-to-completion
 
 ## React Tree Diagram, Routes, & Components
 tbd
@@ -32,10 +35,12 @@ The application leverages a robust and intuitive database design to effectively 
 Through these interconnected models, the database effectively mirrors the agile project management process, offering flexibility, scalability, and a user-centric approach to task management.
 
 ## Technologies Used
-tbd
+Javascript, React, Python, Flask
 
 ## Stretch Goals
-tbd
+- Authenticated log ins
+- Analytics
+- Auto-assignment
 
 ## Kanban
-tbd
+https://trello.com/b/VEGTLHFN/sprintr
