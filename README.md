@@ -16,16 +16,17 @@ tbd
 
 ## Database Design
 <img width="682" alt="image" src="https://github.com/tyjsmith1/sprintr/assets/95344047/50595565-4f5e-4730-a91f-7ef9fdc1a010">
+
 The application leverages a robust and intuitive database design to effectively manage agile project workflows. The database consists of several key models, each serving a distinct purpose:
-User: Central to the application, this model tracks users, their roles, areas of focus (e.g., frontend, backend), and capacity for work. It's pivotal for assigning tasks based on skills and availability.
+**User:** Central to the application, this model tracks users, their roles, areas of focus (e.g., frontend, backend), and capacity for work. It's pivotal for assigning tasks based on skills and availability.
 
-Ticket: At the heart of project tracking, each ticket represents a task or issue. It includes details like title, status, category, and urgency, along with references to its assignee, author, and associated sprint. The model is designed to track the lifecycle of tasks from creation to completion.
+**Ticket:** At the heart of project tracking, each ticket represents a task or issue. It includes details like title, status, category, and urgency, along with references to its assignee, author, and associated sprint. The model is designed to track the lifecycle of tasks from creation to completion.
 
-Sprint: This model captures the essence of agile methodology, encapsulating a set timeframe (start and end dates) during which a set of tickets (tasks) are to be completed.
+**Sprint:** This model captures the essence of agile methodology, encapsulating a set timeframe (start and end dates) during which a set of tickets (tasks) are to be completed.
 
-TicketLog: An essential model for maintaining a history of updates and communications on each ticket. It helps in keeping a transparent and chronological track of discussions and changes.
+**TicketLog:** An essential model for maintaining a history of updates and communications on each ticket. It helps in keeping a transparent and chronological track of discussions and changes.
 
-TicketContributor: Facilitates a many-to-many relationship between tickets and users. This design choice allows multiple users to collaborate on a single ticket, reflecting real-world team dynamics.
+**TicketContributor: **Facilitates a many-to-many relationship between tickets and users. This design choice allows multiple users to collaborate on a single ticket, reflecting real-world team dynamics.
 
 Through these interconnected models, the database effectively mirrors the agile project management process, offering flexibility, scalability, and a user-centric approach to task management.
 
