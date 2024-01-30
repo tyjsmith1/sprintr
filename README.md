@@ -18,6 +18,7 @@ tbd
 <img width="682" alt="image" src="https://github.com/tyjsmith1/sprintr/assets/95344047/50595565-4f5e-4730-a91f-7ef9fdc1a010">
 
 The application leverages a robust and intuitive database design to effectively manage agile project workflows. The database consists of several key models, each serving a distinct purpose:
+
 **User:** Central to the application, this model tracks users, their roles, areas of focus (e.g., frontend, backend), and capacity for work. It's pivotal for assigning tasks based on skills and availability.
 
 **Ticket:** At the heart of project tracking, each ticket represents a task or issue. It includes details like title, status, category, and urgency, along with references to its assignee, author, and associated sprint. The model is designed to track the lifecycle of tasks from creation to completion.
