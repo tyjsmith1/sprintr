@@ -17,13 +17,13 @@ class User(db.Model, SerializerMixin):
     user_capacity = db.Column(db.Integer)
 
     #________RELATIONSHIPS________#
-    assigned_tickets = db.relationship("Ticket",foreign_keys="[Ticket.assignee_user_id]", back_populates="assignee")
-    authored_tickets = db.relationship("Ticket",foreign_keys="[Ticket.author_user_id]", back_populates="author")
+    assigned_tickets = db.relationship("Ticket", foreign_keys="[Ticket.assignee_user_id]", back_populates="assignee")
+    authored_tickets = db.relationship("Ticket", foreign_keys="[Ticket.author_user_id]", back_populates="author")
     ticket_logs = db.relationship("TicketLog", back_populates="user")
     ticket_contributors = db.relationship("TicketContributor", back_populates="user")
 
     #________SERIAL________#
-    serialize_rules = ('-tickets.user','-ticket_logs.user','-ticket_contributors.user', )
+    serialize_rules = ('-assigned_tickets.assignee', '-authored_tickets.author', '-ticket_logs.user', '-ticket_contributors.user', )
 
     #________VALIDATIONS________#
 
@@ -117,7 +117,7 @@ class Ticket(db.Model, SerializerMixin):
     ticket_logs = db.relationship("TicketLog", back_populates="ticket")
 
     #________SERIAL________#
-    serialize_rules = ('-user.ticket','-sprint.ticket','-ticket_contributors.ticket','-ticket_logs.ticket',)
+    serialize_rules = ('-assignee.assigned_tickets','-author.authored_tickets','-ticket_contributors.ticket','-ticket_logs.ticket',)
 
     #________VALIDATIONS________#
 

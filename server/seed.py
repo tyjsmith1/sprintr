@@ -39,8 +39,12 @@ if __name__ == '__main__':
     with app.app_context():
         print("Clearing db...")
         User.query.delete()
+        Ticket.query.delete()
+        TicketContributor.query.delete()
+        Sprint.query.delete()
+        TicketLog.query.delete()
 
-        print("Seeding Users...")
-        users = create_users()
-        db.session.add_all(users)
+        # print("Seeding Users...")
+        # users = create_users()
+        # db.session.add_all(users)
         db.session.commit()
