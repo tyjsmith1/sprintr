@@ -1,7 +1,32 @@
-:root {
-  --bg: #282c34;
-  --header: #fff;
-  --link: #61dafb;
-  --text: hsla(0, 0%, 100%, 0.88);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* background: url('./components/Assets/cesar-couto-sKuVjm0xyLY-unsplash.jpg') no-repeat; */
+  /* background: url('./components/Assets/codioful-formerly-gradienta-BgrRH1_ZI5Y-unsplash.jpg') no-repeat; */
+  /* background: url('./components/Assets/codioful-formerly-gradienta-QWutu2BRpOs-unsplash.jpg') no-repeat; */
+  /* background: url('./components/Assets/Untitled.jpg') no-repeat; */
+  /* background: url('./components/Assets/Num2.jpg') no-repeat; */
+  background: url('./components/Assets/Num3.jpg') no-repeat;
+  /* background: url('./components/Assets/Dark\ Retro\ Warm\ Glow.jpg') no-repeat; */
+
+  background-size: cover;
+  background-position: center;
+}
+
+.logo {
+  font-size: 50px;
+  text-align: center;
+  display: flex;
+  color: antiquewhite;
+}
