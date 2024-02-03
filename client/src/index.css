@@ -4,29 +4,20 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  /* background: url('./components/Assets/cesar-couto-sKuVjm0xyLY-unsplash.jpg') no-repeat; */
-  /* background: url('./components/Assets/codioful-formerly-gradienta-BgrRH1_ZI5Y-unsplash.jpg') no-repeat; */
-  /* background: url('./components/Assets/codioful-formerly-gradienta-QWutu2BRpOs-unsplash.jpg') no-repeat; */
-  /* background: url('./components/Assets/Untitled.jpg') no-repeat; */
-  /* background: url('./components/Assets/Num2.jpg') no-repeat; */
-  background: url('./components/Assets/Num3.jpg') no-repeat;
+  background: url('./components/Assets/Num2.jpg') no-repeat;
+  /* background: url('./components/Assets/Num3.jpg') no-repeat; */
   /* background: url('./components/Assets/Dark\ Retro\ Warm\ Glow.jpg') no-repeat; */
-
   background-size: cover;
   background-position: center;
 }
 
-.logo {
-  font-size: 50px;
-  text-align: center;
+body .login-div {
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   display: flex;
-  color: antiquewhite;
 }
