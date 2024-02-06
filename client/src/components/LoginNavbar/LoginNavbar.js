@@ -1,19 +1,20 @@
 import React from "react";
-import './Navbar.css'
+import './LoginNavbar.css'
+import { BrowserRouter, Route, Routes, Link, NavLink } from "react-router-dom";
 
 function Navbar(){
     return (
         <div className="navbar-container">
             <div className="nav-logo-div">
-                <h1 className="nav-logo">sprintr.</h1>
+                <h1><NavLink className="nav-logo" to="/">sprintr.</NavLink></h1>
             </div>
             <div className="nav-option-div">
                 <ul className="nav-option-ul">
                     <li>
-                        <a className="nav-options">About</a>
+                        <NavLink className="nav-options" to="/about">About</NavLink>
                     </li>
                     <li>
-                        <a className="nav-options">Sign Up</a>
+                        <NavLink className="nav-options" to="/signup">SignUp</NavLink>
                     </li>
                 </ul>
             </div>

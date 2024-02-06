@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link, NavLink } from "react-router-dom";
 import LoginForm from "./LoginForm/LoginForm";
-import Navbar from "./LoginNavbar/Navbar";
+import LoginNavbar from "./LoginNavbar/LoginNavbar";
+import SignUp from "./SignUp/SignUp";
+import About from "./About/About";
 
 function App() {
   return (
-    <div>
-      <Navbar/>
-      <div className="login-div">
-        <LoginForm/>
-      </div>
-    </div>
-
+    <BrowserRouter>
+      <LoginNavbar/>
+      <main>
+        <div className="login-div">
+          <Routes>
+            <Route index element={<LoginForm/>}/>
+            <Route path="/signup" element={<SignUp/>}/>
+            <Route path="/about" element={<About/>}/>
+          </Routes>
+        </div>
+      </main>
+    </BrowserRouter>
   )
 }
 

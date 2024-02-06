@@ -16,7 +16,9 @@
     display: flex;
     color: rgb(255, 232, 201);
     padding-left: 40px;
+    text-decoration: none;
 }
+
 
 .nav-options {
     font-size: 20px;
@@ -30,12 +32,14 @@
     border-radius: 10px;
     gap: 1rem;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .nav-option-div {
     display: flex;
     padding-left: 10px;
     padding-right: 40px;
+    text-decoration: none;
 }
 
 .nav-option-ul {
