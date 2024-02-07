@@ -1,24 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes, Link, NavLink } from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Navigate } from "react-router-dom";
+
+//imported components
 import LoginForm from "./LoginForm/LoginForm";
-import LoginNavbar from "./LoginNavbar/LoginNavbar";
 import SignUp from "./SignUp/SignUp";
 import About from "./About/About";
+import "../index.css";
+import UserMain from "./UserMain/UserMain";
+
+
+//Imported Layouts
+import RootLayout from "../layouts/RootLayout";
+import UserMainLayout from "../layouts/UserMainLayout"
 
 function App() {
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+    <Route path="/" element={<RootLayout />}>
+        <Route index element={<LoginForm />}/>
+        <Route path="/signup" element={<SignUp />}/>
+        <Route path="/about" element={<About />}/>
+        <Route path="/dashboard" element={<UserMain />}/>
+          <Route index element={<Navigate to="/hey" />}/>
+          <Route path="/dashboard" element={<UserMain />}/>
+    </Route>
+    )
+  )
+
   return (
-    <BrowserRouter>
-      <LoginNavbar/>
-      <main>
-        <div className="login-div">
-          <Routes>
-            <Route index element={<LoginForm/>}/>
-            <Route path="/signup" element={<SignUp/>}/>
-            <Route path="/about" element={<About/>}/>
-          </Routes>
-        </div>
-      </main>
-    </BrowserRouter>
+
+      // <main>
+      //   <LoginNavbar/>
+      //   <div className="login-div">
+      //   </div>
+      // </main>
+      <RouterProvider router={router}/>
+
   )
 }
 

@@ -4,6 +4,7 @@ import { FaUser,FaLock, FaKey } from "react-icons/fa";
 function SignUp() {
 
     return (
+        <div className="outside">
         <div className="wrapper">
             <form action="">
                 <h1>Sign Up</h1>
@@ -22,6 +23,8 @@ function SignUp() {
                 <button type="submit">Get Started!</button>
             </form>
         </div>
+        </div>
+
     )
 }
 

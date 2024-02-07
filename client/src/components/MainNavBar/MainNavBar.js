@@ -1,12 +1,11 @@
 import React from "react";
-import './LoginNavbar.css'
 import { NavLink } from "react-router-dom";
 
-function Navbar(){
+function MainNavbar(){
     return (
         <div className="navbar-container">
             <div className="nav-logo-div">
-                <h1><NavLink className="nav-logo" to="/">sprintr.</NavLink></h1>
+                <h1><NavLink className="nav-logo" to="/dashboard">sprintr.</NavLink></h1>
             </div>
             <div className="nav-option-div">
                 <ul className="nav-option-ul">
@@ -14,7 +13,7 @@ function Navbar(){
                         <NavLink className="nav-options" to="/about">About</NavLink>
                     </li>
                     <li>
-                        <NavLink className="nav-options" to="/signup">SignUp</NavLink>
+                        <NavLink className="nav-options" to="/">Log Out</NavLink>
                     </li>
                 </ul>
             </div>
@@ -22,4 +21,4 @@ function Navbar(){
     )
 }
 
-export default Navbar;
+export default MainNavbar

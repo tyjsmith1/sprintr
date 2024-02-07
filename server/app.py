@@ -96,7 +96,8 @@ def tickets():
 ####>>>>GET<<<<####
     if request.method == 'GET':
         tickets = Ticket.query.all()
-        ticket_response_body = [ticket.to_dict() for ticket in tickets]
+        ### Figure this out later -- serious spaghetti code
+        ticket_response_body = [ticket.to_dict(only=("id", "title", "status", "category", "body", "urgency", "story_points", "created_at", "completed_at", "assignee_user_id", "author_user_id", "sprint_id",)) for ticket in tickets]
 
         res = make_response(
             ticket_response_body,
@@ -121,7 +122,7 @@ def tickets():
         db.session.add(new_ticket)
         db.session.commit()
 
-        ticket_response_body = new_ticket.to_dict()
+        ticket_response_body = new_ticket.to_dict(only=("id", "title", "status", "category", "body", "urgency", "story_points", "created_at", "completed_at", "assignee_user_id", "author_user_id", "sprint_id",))
 
         res = make_response(
             ticket_response_body,
