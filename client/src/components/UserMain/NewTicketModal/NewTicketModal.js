@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./NewTicketModal.css"
 
-function NewTicketModal({toggleTicketModal}) {
+function NewTicketModal({toggleNewTicketModal}) {
 
     const [formData, setFormData] = useState({
         title: '',
@@ -24,6 +24,13 @@ function NewTicketModal({toggleTicketModal}) {
 
     function handleSubmit(e) {
         e.preventDefault()
+
+        const isEmpty = Object.values(formData).some(value => value.trim() === '');
+
+        if (isEmpty) {
+        alert('Please fill out all fields.');
+        return; 
+        }
         
         const ticketData = {
             assignee_user_id: formData.assignedTo,
@@ -38,9 +45,6 @@ function NewTicketModal({toggleTicketModal}) {
             title: formData.title,
             urgency: formData.urgency
         }
-        
-        console.log("form data is: "+ formData)
-        console.log("ticket data is: "+ ticketData)
 
         fetch('/tickets', {
             method: "POST",
@@ -52,21 +56,9 @@ function NewTicketModal({toggleTicketModal}) {
         .then(response => response.json())
         .then(data => {
             console.log("success: ", data)
-            toggleTicketModal()
+            toggleNewTicketModal()
         })
     }
-
-    // function loadUsers(){
-    //     fetch('/users')
-    //     .then(response => response.json())
-    //     .then(data => (
-    //         console.log(data)
-    //     ))
-    // }
-    
-    // useEffect(() => {
-    //     loadUsers()
-    // },[])
 
     return(
         <div className="modal">
@@ -193,7 +185,7 @@ function NewTicketModal({toggleTicketModal}) {
                         <option value="10">Flynn</option>
                     </select>
                     <br></br>
-                    <button className="close-modal" onClick={toggleTicketModal}>CLOSE</button>
+                    <button className="close-modal" onClick={toggleNewTicketModal}>CLOSE</button>
                     <button className="close-modal" type="submit">SUBMIT</button>
                 </form>
             </div>
