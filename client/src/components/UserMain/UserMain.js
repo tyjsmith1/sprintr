@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from "react";
+import { IoIosCreate } from "react-icons/io";
+import { MdPlaylistAdd } from "react-icons/md";
 import Tickets from '../UserMain/Tickets/Tickets'
 import './UserMain.css'
+import NewTicketModal from "./NewTicketModal/NewTicketModal";
 
 function UserMain() {
 
@@ -8,6 +11,12 @@ function UserMain() {
     const [todoTickets, setTodoTickets] = useState([])
     const [inProgTickets, setInProgTickets] = useState([])
     const [completeTickets, setCompleteTickets] = useState([])
+    const [modal, setModal] = useState(false)
+
+    function toggleTicketModal() {
+        setModal(!modal)
+        loadTickets()
+    }
 
     function loadTickets(){
         let stagingToDo =[]
@@ -45,7 +54,7 @@ function UserMain() {
 
     return(
         <div>
-            {/* <h1>UserMainPage!</h1> */}
+            <button className="new-ticket-button" onClick={toggleTicketModal}><p className="p-add-icon"> <MdPlaylistAdd className="add-icon"/> Create New Ticket</p></button>
             <div className="ticket-category-container">
                 <div className="ticket-category">
                     <h2>To Do</h2>
@@ -60,6 +69,9 @@ function UserMain() {
                     <Tickets  tickets={completeTickets}/>
                 </div>
             </div>
+            {modal && (
+                <NewTicketModal toggleTicketModal={toggleTicketModal}/>
+            )}
         </div>
     )
 }

@@ -1,0 +1,38 @@
+.close-modal {
+    background: rgba(255,255,255,0.25);
+    border: none;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: rgba(0,0,0,.8);
+    padding: 14px 28px;
+    border-radius: 20px;
+    width: 750px;
+    height: 600px;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(30px);
+}
+
+.input {
+    color: black;
+}
