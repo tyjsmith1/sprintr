@@ -17,9 +17,10 @@
     border-radius: 20px;
     width: 750px;
     height: 600px;
+    animation: fadeIn .5s ease-in-out;
     }
 
-.modal, .overlay {
+.modal {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -27,13 +28,40 @@
     right: 0;
     bottom: 0;
     position: fixed;
+    /* animation: fadeIn 0.25s ease-in-out; */
 }
 
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(30px);
-    }
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    animation: fadeIn .25s ease-in-out;
+}
 
 .input {
     color: black;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }
