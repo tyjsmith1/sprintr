@@ -1,0 +1,44 @@
+.sprint-div-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 1500px;
+    min-width: 1200px;
+    height: 80vh;
+    margin: 20px auto;
+}
+
+.Q1-container, .Q2-container, .Q3-container, .Q4-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(82, 82, 82, 0.1);
+    backdrop-filter: blur(100px);
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.Q1-container:hover, .Q2-container:hover, .Q3-container:hover, .Q4-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    background-color: rgba(255,255,255,0.1);
+}
+
+.Q1-container .content, .Q2-container .content, .Q3-container .content, .Q4-container .content {
+    margin: 20px;
+}
+
+@media (max-width: 1200px) {
+    .sprint-div-container {
+        grid-template-columns: 1fr; /* Stack the quadrants vertically on smaller screens */
+        min-width: 0; /* Allows the container to adjust to smaller screens */
+        gap: 15px;
+    }
+}

@@ -1,21 +1,41 @@
 import React, {useEffect, useState} from "react";
-import { IoIosCreate } from "react-icons/io";
 import { MdPlaylistAdd } from "react-icons/md";
 import Tickets from '../UserMain/Tickets/Tickets'
 import './UserMain.css'
 import NewTicketModal from "./NewTicketModal/NewTicketModal";
 import UserDropDownFilter from "./UserDropDownFilter";
+import ViewTicketModal from "./ViewTicketModal";
+
 
 function UserMain() {
-
+    // fetch state
     const [allTickets, setAllTickets] = useState([])
+
+    // separate tickets into states by category
     const [todoTickets, setTodoTickets] = useState([])
     const [inProgTickets, setInProgTickets] = useState([])
     const [completeTickets, setCompleteTickets] = useState([])
+
+    // New Ticket Modal toggle
     const [newTicketModal, setNewTicketModal] = useState(false)
+
+    // View/edit/update Ticket Modal Toggle
+    const [viewTicketModal, setViewTicketModal] = useState(false)
+    const [selectedTicket, setSelectedTicket] = useState(null)
 
     function toggleNewTicketModal() {
         setNewTicketModal(!newTicketModal)
+        loadTickets()
+    }
+
+    function handleTicketSelect(ticket) {
+        setSelectedTicket(ticket)
+        setViewTicketModal(!viewTicketModal)
+        console.log(ticket)
+    }
+
+    function toggleViewTicketModal() {
+        setViewTicketModal(!viewTicketModal)
         loadTickets()
     }
 
@@ -39,9 +59,9 @@ function UserMain() {
         let stagingInProg =[]
         let stagingComplete = []
 
-        stagingToDo = tickets.filter(ticket => ticket.status == 'to_do')
-        stagingInProg = tickets.filter(ticket => ticket.status == 'in_progress')
-        stagingComplete = tickets.filter(ticket => ticket.status == 'complete')
+        stagingToDo = tickets.filter(ticket => ticket.status === 'to_do')
+        stagingInProg = tickets.filter(ticket => ticket.status === 'in_progress')
+        stagingComplete = tickets.filter(ticket => ticket.status === 'complete')
 
         setTodoTickets(stagingToDo)
         setInProgTickets(stagingInProg)
@@ -62,6 +82,20 @@ function UserMain() {
     const inProgTicketCount = inProgTickets.length
     const completedTicketCount = completeTickets.length
 
+    function handleTicketDelete(ticketId) {
+        fetch(`/tickets/${ticketId}`, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (response.ok) {
+                loadTickets()
+            } else {
+                console.error("delete failed")
+            }
+        }
+        )
+    }
+
     return(
         <div>
             <button
@@ -74,22 +108,48 @@ function UserMain() {
                 <div className="ticket-category">
                     <h2>To Do</h2>
                     <p className="ticket-category-status">{toDoTicketCount} tickets remaining</p>
-                    <Tickets allTickets={todoTickets}/>
+                    <Tickets
+                        allTickets={todoTickets}
+                        handleTicketSelect={handleTicketSelect}
+                        handleTicketDelete={handleTicketDelete}
+                    />
                 </div>
                 <div className="ticket-category">
                     <h2>In Progress</h2>
                     <p className="ticket-category-status">{inProgTicketCount} tickets in progress</p>
-                    <Tickets allTickets={inProgTickets}/>
+                    <Tickets
+                        allTickets={inProgTickets}
+                        handleTicketSelect={handleTicketSelect}
+                        handleTicketDelete={handleTicketDelete}
+                    />
                 </div>
                 <div className="ticket-category">
                     <h2>Complete</h2>
                     <p className="ticket-category-status">{completedTicketCount} tickets completed</p>
-                    <Tickets  allTickets={completeTickets}/>
+                    <Tickets 
+                        allTickets={completeTickets}
+                        handleTicketSelect={handleTicketSelect}
+                        handleTicketDelete={handleTicketDelete}
+                    />
                 </div>
             </div>
-            {newTicketModal && (
-                <NewTicketModal toggleNewTicketModal={toggleNewTicketModal}/>
-            )}
+            <div>
+                {newTicketModal && (
+                    <NewTicketModal
+                        toggleNewTicketModal={toggleNewTicketModal}
+                        newTicketModal={newTicketModal}
+                    />
+                )}
+            </div>
+            <div>
+                {viewTicketModal && (
+                    <ViewTicketModal 
+                        toggleViewTicketModal={toggleViewTicketModal}
+                        selectedTicket={selectedTicket}
+                        viewTicketModal={viewTicketModal}
+                    />
+                )}
+            </div>
         </div>
     )
 }

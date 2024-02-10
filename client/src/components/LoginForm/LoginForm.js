@@ -21,7 +21,7 @@ function LoginForm(){
                     <label><input type="checkbox"/>Remember Me</label>
                     <a href="#">Forgot password?</a>
                 </div>
-                <NavLink to="dashboard"><button type="submit">Login</button></NavLink>
+                <NavLink to="dashboard"><button className="login-btn" type="submit">Login</button></NavLink>
                 <div className="register-link">
                     <p>Don't have an account? <NavLink to="/signup">Register</NavLink></p>
 

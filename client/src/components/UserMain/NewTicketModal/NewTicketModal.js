@@ -5,13 +5,13 @@ function NewTicketModal({toggleNewTicketModal}) {
 
     const [formData, setFormData] = useState({
         title: '',
-        urgency: '',
-        category: '',
-        status: '',
-        storyPoints: '',
+        urgency: 'DEFAULT',
+        category: 'DEFAULT',
+        status: 'DEFAULT',
+        storyPoints: 'DEFAULT',
         body: '',
-        assignedTo: '',
-        author: ''
+        assignedTo: 'DEFAULT',
+        author: 'DEFAULT'
     })
 
     function handleChange(e) {
@@ -78,7 +78,6 @@ function NewTicketModal({toggleNewTicketModal}) {
                     <br></br>
                     <label>Urgency: </label>
                     <select 
-                        // defaultValue={'DEFAULT'}
                         className="input"
                         name="urgency"
                         value={formData.urgency}
@@ -92,7 +91,6 @@ function NewTicketModal({toggleNewTicketModal}) {
                     <br></br>
                     <label>Domain: </label>
                     <select 
-                        // defaultValue={'DEFAULT'}
                         className="input"
                         name="category"
                         value={formData.category}
@@ -105,7 +103,6 @@ function NewTicketModal({toggleNewTicketModal}) {
                     <br></br>
                     <label>Status: </label>
                     <select 
-                        // defaultValue={'DEFAULT'}
                         className="input"
                         name="status"
                         value={formData.status}
@@ -119,7 +116,6 @@ function NewTicketModal({toggleNewTicketModal}) {
                     <br></br>
                     <label>Story Points: </label>
                     <select 
-                        // defaultValue={'DEFAULT'} 
                         className="input"
                         name="storyPoints"
                         value={formData.storyPoints}
@@ -146,7 +142,6 @@ function NewTicketModal({toggleNewTicketModal}) {
                     {/* Below this comment will be automated at some point */}
                     <label>Assigned to: </label>
                     <select 
-                        // defaultValue={'DEFAULT'}
                         className="input"
                         name="assignedTo"
                         value={formData.assignedTo}
@@ -166,7 +161,6 @@ function NewTicketModal({toggleNewTicketModal}) {
                     </select>
                     <label>Author: </label>
                     <select 
-                        // defaultValue={'DEFAULT'}
                         className="input"
                         name="author"
                         value={formData.author}
@@ -185,7 +179,7 @@ function NewTicketModal({toggleNewTicketModal}) {
                         <option value="10">Flynn</option>
                     </select>
                     <br></br>
-                    <button className="close-modal" onClick={toggleNewTicketModal}>CLOSE</button>
+                    <button className="close-modal" type="button" onClick={toggleNewTicketModal}>CLOSE</button>
                     <button className="close-modal" type="submit">SUBMIT</button>
                 </form>
             </div>

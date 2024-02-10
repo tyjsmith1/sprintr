@@ -3,6 +3,7 @@
     border: none;
     padding: 2px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .modal-content {
@@ -16,7 +17,7 @@
     border-radius: 20px;
     width: 750px;
     height: 600px;
-}
+    }
 
 .modal, .overlay {
     width: 100vw;
@@ -31,7 +32,7 @@
 .overlay {
     background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(30px);
-}
+    }
 
 .input {
     color: black;

@@ -87,3 +87,23 @@
     color:aliceblue;
     text-align: center;
 }
+
+.ticket-category {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.ticket-category:hover {
+    /* transform: translateY(-2px); */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    background-color: rgba(255,255,255,0.05);
+}
+
+.ticket-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.ticket-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    background-color: rgba(255,255,255,0.4);
+}

@@ -10,7 +10,10 @@ function MainNavbar(){
             <div className="nav-option-div">
                 <ul className="nav-option-ul">
                     <li>
-                        <NavLink className="nav-options" to="/about">About</NavLink>
+                        <NavLink className="nav-options" to="/dashboard">Tasks</NavLink>
+                    </li>
+                    <li>
+                        <NavLink className="nav-options" to="/sprints">Sprints</NavLink>
                     </li>
                     <li>
                         <NavLink className="nav-options" to="/">Log Out</NavLink>

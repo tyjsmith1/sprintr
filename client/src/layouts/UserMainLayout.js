@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import MainNavbar from "../components/MainNavBar/MainNavBar";
-function RootLayout(){
+
+function UserMainLayout(){
     return (
         <div className="root-layout">
             <MainNavbar/>
@@ -12,4 +13,4 @@ function RootLayout(){
     )
 }
 
-export default RootLayout
+export default UserMainLayout

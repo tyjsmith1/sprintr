@@ -51,7 +51,12 @@
     align-items: center;
 }
 
+.nav-option-ul li {
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+}
+
 .nav-option-ul li:hover {
-    background-color: rgb(169, 169, 169);
+    background-color: rgba(255,255,255,0.75);
     border-radius: 10px;
 }

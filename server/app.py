@@ -135,7 +135,7 @@ def ticket_by_id(id):
     ticket = Ticket.query.filter(Ticket.id == id).first()
 ####>>>>GET<<<<####
     if request.method == 'GET':
-        ticket_body_res = ticket.to_dict()
+        ticket_body_res = ticket.to_dict(only=("id", "title", "status", "category", "body", "urgency", "story_points", "created_at", "completed_at", "assignee_user_id", "author_user_id", "sprint_id",))
 
         res = make_response(
             ticket_body_res,
@@ -159,7 +159,7 @@ def ticket_by_id(id):
                 setattr(ticket,attr,form_data[attr])
 
             db.session.commit()
-            ticket_body_res = ticket.to_dict()
+            ticket_body_res = ticket.to_dict(only=("id", "title", "status", "category", "body", "urgency", "story_points", "created_at", "completed_at", "assignee_user_id", "author_user_id", "sprint_id",))
 
             res = make_response(
                 ticket_body_res,
