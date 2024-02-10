@@ -3,6 +3,15 @@ import "./NewTicketModal.css"
 
 function NewTicketModal({toggleNewTicketModal}) {
 
+    const [isClosing, setIsClosing] = useState(false);
+
+    const startCloseModal = () => {
+        setIsClosing(true);
+        setTimeout(() => {
+            toggleNewTicketModal();
+        }, 500);
+    };
+
     const [formData, setFormData] = useState({
         title: '',
         urgency: 'DEFAULT',
@@ -61,8 +70,8 @@ function NewTicketModal({toggleNewTicketModal}) {
     }
 
     return(
-        <div className="modal">
-            <div className="overlay"></div>
+        <div className={`modal ${isClosing ? 'fade-out-modal' : ''}`}>
+            <div className={`overlay ${isClosing ? 'fade-out-overlay' : ''}`}></div>
             <div className="modal-content">
                 <h2>New Ticket</h2>
                 <form onSubmit={handleSubmit}>
@@ -179,7 +188,7 @@ function NewTicketModal({toggleNewTicketModal}) {
                         <option value="10">Flynn</option>
                     </select>
                     <br></br>
-                    <button className="close-modal" type="button" onClick={toggleNewTicketModal}>CLOSE</button>
+                    <button className="close-modal" type="button" onClick={startCloseModal}>CLOSE</button>
                     <button className="close-modal" type="submit">SUBMIT</button>
                 </form>
             </div>
