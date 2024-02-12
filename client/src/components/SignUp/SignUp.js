@@ -50,15 +50,33 @@ function SignUp() {
         e.preventDefault()
         const isValid = validateFormInput()
         if(isValid) {
-            console.log("is valid!")
-            setSignupFormData({
-                username: '',
-                password: '',
-                confirmPassword: '',
-                successMsg: "Success! Your account has been created."
-            });
+            const userData = {
+                username: signupFormData.username,
+                role: "backend",
+                user_capacity: 50,
+            }
+            fetch('/users', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Success: ", data)
+
+                setSignupFormData({
+                    username: '',
+                    password: '',
+                    confirmPassword: '',
+                    successMsg: "Success! Your account has been created."
+                })
+            })
+            
+            // Reset the form upon successful validation and post
         } else {
-            console.log("is not valid!")
+            console.log("Validation failed!")
         }      
     }
 

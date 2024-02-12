@@ -31,7 +31,6 @@ function UserMain() {
     function handleTicketSelect(ticket) {
         setSelectedTicket(ticket)
         setViewTicketModal(!viewTicketModal)
-        console.log(ticket)
     }
 
     function toggleViewTicketModal() {

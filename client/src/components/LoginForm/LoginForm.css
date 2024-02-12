@@ -55,7 +55,7 @@
 }
 
 .input-box input::placeholder {
-    color: rgb(255, 232, 201);
+    color: rgba(255, 232, 201,0.5);
 }
 
 .input-box .icon {

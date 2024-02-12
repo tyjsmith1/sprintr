@@ -12,7 +12,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
-    background: rgba(0,0,0,.7);
+    /* background: rgba(0,0,0,.7); */
+    background: linear-gradient(180deg, #000000, #2d2d2d);
     padding: 14px 28px;
     border-radius: 20px;
     width: 750px;
@@ -44,7 +45,22 @@
 }
 
 .input {
-    color: black;
+    background-color: #f5f5f5; 
+    color: #333333; 
+}
+
+.modal-content h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #EAEAEA;
+    margin-bottom: 10px;
+}
+
+.ticket-body {
+    font-size: 14px;
+    color: #CACACA;
+    margin-bottom: 20px;
+    white-space: pre-line; /* For preserving line breaks if your ticket body contains them */
 }
 
 .fade-out-overlay {
@@ -54,6 +70,19 @@
 .fade-out-modal {
     animation: fadeOutModal .25s ease-in-out forwards;
 }
+
+/* .badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 15px;
+    color: white;
+    margin-right: 5px;
+}
+
+.badge-important { background-color: #D9534F; } 
+.badge-info { background-color: #5BC0DE; } 
+.badge-success { background-color: #5CB85C; }  */
 
 @keyframes fadeInOverlay {
     from {
