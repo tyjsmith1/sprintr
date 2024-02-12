@@ -17,38 +17,67 @@ function SignUp() {
         confirmPassword: ''
     })
 
-    function validateFormInput(e){
-        e.preventDefault()
-        console.log("submitted")
+    function validateFormInput(){
 
-        let inputError = {
+        let inputError = false
+
+        const errors = {
             username: "",
             password: "",
             confirmPassword: ""
         }
-
-        if (!signupFormData.email && !signupFormData.password) {
-            setSignupFormError({
-                ...inputError,
-                username: "Enter a valid username",
-                password: "Password should not be empty"
-            })
-            return
+        
+        if (!signupFormData.username){
+            errors.username = "Enter a valid username"
+            inputError = true
         }
+        
+        if (!signupFormData.password){
+            errors.password = "Password cannot be empty"
+            inputError = true
+        } else if (signupFormData.password !== signupFormData.confirmPassword) {
+            errors.confirmPassword = "Password and confirm password should match"
+            inputError = true
+        }
+
+        setSignupFormError(errors)
+
+        return !inputError
     }
+
+
+    function handleSubmit(e){
+        e.preventDefault()
+        const isValid = validateFormInput()
+        if(isValid) {
+            console.log("is valid!")
+            setSignupFormData({
+                username: '',
+                password: '',
+                confirmPassword: '',
+                successMsg: "Success! Your account has been created."
+            });
+        } else {
+            console.log("is not valid!")
+        }      
+    }
+
+    
 
     function handleFormChange(e){
         const { name, value } = e.target
         setSignupFormData(prevState => ({
             ...prevState,
-            [name]: value
+            [name]: value,
+            successMsg: ''
         }))
     }
+    
 
     return (
         <div className="outside">
             <div className="wrapper">
-                <form action="" onSubmit={validateFormInput}>
+                <form action="" onSubmit={handleSubmit}>
                     <h1>Sign Up</h1>
                     <div className="input-box">
                         <input 
