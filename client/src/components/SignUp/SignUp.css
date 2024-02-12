@@ -1,0 +1,13 @@
+.error-message {
+    font-size: 12px;
+    font-weight: 500;
+    color: red;
+    margin-top: 6px;
+}
+
+.success-message {
+    font-size: 12px;
+    font-weight: 500;
+    color: green;
+    margin-top: 16px;
+}
