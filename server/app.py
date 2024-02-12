@@ -35,7 +35,6 @@ def get_users():
         new_user = User(
             username = form_data['username'],
             role = form_data['role'],
-            user_focus = form_data['user_focus'],
             user_capacity = form_data['user_capacity']
         )
         db.session.add(new_user)
@@ -266,17 +265,29 @@ def ticket_logs():
 
 @app.route('/ticket-logs/<int:id>', methods = ['GET','DELETE'])
 def ticket_log_by_id(id):
-    ticket_log = TicketLog.query.filter(TicketLog.id == id).first()
 ####>>>>GET<<<<####
     if request.method == 'GET':
-        ticket_log_res = ticket_log.to_dict(only = ('id','comment_text','author_user_id','ticket_id',))
+        ticket_logs = (TicketLog.query
+                        .join(User, TicketLog.author_user_id == User.id)
+                        .filter(TicketLog.ticket_id == id)
+                        .all()
+        )
+        
+        ticket_logs_res = [{
+            'id': log.id,
+            'comment_text': log.comment_text,
+            'author_user_id': log.author_user_id,
+            'ticket_id': log.ticket_id,
+            'username': log.user.username
+        } for log in ticket_logs]
 
         res = make_response(
-            ticket_log_res,
+            ticket_logs_res,
             200
         )
 ####>>>>DELETE<<<<####
     if request.method == 'DELETE':
+        ticket_log = TicketLog.query.filter(TicketLog.id == id).first()
         db.session.delete(ticket_log)
         db.session.commit()
 

@@ -13,7 +13,6 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False)
     role = db.Column(db.String, nullable=False)
-    user_focus = db.Column(db.String)
     user_capacity = db.Column(db.Integer)
 
     #________RELATIONSHIPS________#
