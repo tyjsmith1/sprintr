@@ -71,18 +71,37 @@
     animation: fadeOutModal .25s ease-in-out forwards;
 }
 
-/* .badge {
-    display: inline-block;
-    padding: 5px 10px;
-    font-size: 12px;
-    border-radius: 15px;
+.urgency {
+    padding: 2px 5px;
+    border-radius: 5px;
     color: white;
-    margin-right: 5px;
 }
 
-.badge-important { background-color: #D9534F; } 
-.badge-info { background-color: #5BC0DE; } 
-.badge-success { background-color: #5CB85C; }  */
+.urgency.low {background-color: green;}
+
+.urgency.med {background-color: orange;}
+
+.urgency.high {background-color: red;}
+
+.assign-dropdown {
+    margin: 10px 0;
+    padding: 3px 3px;
+    border-radius: 5px;
+    color: #000000;
+    border: 1px solid #cccccc;
+    width: auto;
+    font-size: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.assign-dropdown:hover,
+.assign-dropdown:focus {
+    border-color: #999999;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    outline: none;
+}
 
 @keyframes fadeInOverlay {
     from {

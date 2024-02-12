@@ -23,6 +23,18 @@ function UserMain() {
     const [viewTicketModal, setViewTicketModal] = useState(false)
     const [selectedTicket, setSelectedTicket] = useState(null)
 
+    // Lifted state For User drop down Filter
+    const [users, setUsers] = useState([])
+    const [selectedUserFilter, setSelectedUserFilter] = useState('all');
+
+    useEffect(() => {
+        fetch('/users')
+        .then(response => response.json())
+        .then(data => {
+            setUsers(data)
+        })
+    },[])
+
     function toggleNewTicketModal() {
         setNewTicketModal(!newTicketModal)
         loadTickets()
@@ -66,10 +78,10 @@ function UserMain() {
         setInProgTickets(stagingInProg)
         setCompleteTickets(stagingComplete)
     }
-
+//this is for filtered tickets in main
     function handleUserSelection(userId) {
-        console.log('Selected user ID: ', userId)
         // Filter tickets here
+        setSelectedUserFilter(userId)
         const filteredByUser = userId ==='all'
             ? allTickets
             : allTickets.filter(ticket => ticket.assignee_user_id.toString() === userId)
@@ -102,7 +114,13 @@ function UserMain() {
                 onClick={toggleNewTicketModal}>
                     <p className="p-add-icon"> <MdPlaylistAdd className="add-icon"/> Create New Ticket</p>
             </button>
-            < UserDropDownFilter className="user-drop-down" onUserSelection={handleUserSelection}/>
+            < UserDropDownFilter
+                className="user-drop-down"
+                onUserSelection={handleUserSelection} 
+                users={users}
+                allOptionLabel="All User Tickets"
+                selectedValue={selectedUserFilter}
+            />
             <div className="ticket-category-container">
                 <div className="ticket-category">
                     <h2>To Do</h2>
@@ -137,6 +155,7 @@ function UserMain() {
                     <NewTicketModal
                         toggleNewTicketModal={toggleNewTicketModal}
                         newTicketModal={newTicketModal}
+                        users={users}
                     />
                 )}
             </div>
@@ -146,6 +165,7 @@ function UserMain() {
                         toggleViewTicketModal={toggleViewTicketModal}
                         selectedTicket={selectedTicket}
                         viewTicketModal={viewTicketModal}
+                        users={users}
                     />
                 )}
             </div>

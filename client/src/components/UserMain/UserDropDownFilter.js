@@ -1,25 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-function UserDropDownFilter({onUserSelection}){
-    const [users, setUsers] = useState([])
-
-        // For User Filter
-    useEffect(() => {
-            fetch('/users')
-            .then(response => response.json())
-            .then(data => {
-                // console.log(data.username)
-                setUsers(data)
-            })
-    },[])
-
-    function handleUserChange(e){
-        onUserSelection(e.target.value)
-    }
+function UserDropDownFilter({onUserSelection, users, selectedValue, allOptionLabel = "All User Tickets"}){
 
     return (
-        <select onChange={handleUserChange} defaultValue="">
-            <option value="all" >All User Tickets</option>
+        <select className="assign-dropdown" onChange={e => onUserSelection(e.target.value)} value={selectedValue || ''}>
+            {allOptionLabel && <option value="all">{allOptionLabel}</option>}
             {users.map(user => (
                 <option key={user.id} value={user.id}>{user.username}</option>
             ))}

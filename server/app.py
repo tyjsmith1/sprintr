@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, jsonify
 from flask_restful import Resource
 from datetime import date
 
@@ -131,17 +131,32 @@ def tickets():
 
 @app.route('/tickets/<int:id>', methods=['GET','DELETE','PATCH'])
 def ticket_by_id(id):
-    ticket = Ticket.query.filter(Ticket.id == id).first()
 ####>>>>GET<<<<####
     if request.method == 'GET':
-        ticket_body_res = ticket.to_dict(only=("id", "title", "status", "category", "body", "urgency", "story_points", "created_at", "completed_at", "assignee_user_id", "author_user_id", "sprint_id",))
+        ticket_details = Ticket.query.join(
+                User, Ticket.assignee_user_id == User.id
+            ).add_columns(
+                Ticket.id,
+                Ticket.title,
+                Ticket.body,
+                Ticket.urgency,
+                Ticket.assignee_user_id,
+                User.username.label('assigned_username')
+            ).filter(Ticket.id == id).first()
+        if ticket_details:
+            response ={
+                'id': ticket_details.id,
+                'title': ticket_details.title,
+                'body': ticket_details.body,
+                'urgency': ticket_details.urgency,
+                'assignee_user_id': ticket_details.assignee_user_id,
+                'assigned_username': ticket_details.assigned_username
+            }
+            res = make_response(jsonify(response), 200)
 
-        res = make_response(
-            ticket_body_res,
-            200
-        )
 ####>>>>DELETE<<<<####   
     elif request.method == 'DELETE':
+        ticket = Ticket.query.filter(Ticket.id == id).first()
         db.session.delete(ticket)
         db.session.commit()
 
@@ -151,6 +166,7 @@ def ticket_by_id(id):
         )
 ####>>>>PATCH<<<<####    
     elif request.method == 'PATCH':
+        ticket = Ticket.query.filter(Ticket.id == id).first()
         try:
             form_data = request.get_json()
 
