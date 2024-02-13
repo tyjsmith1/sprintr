@@ -2,6 +2,9 @@
 
 # Standard library imports
 
+# Business logic
+from sprint_analytics import calculate_sprint_analytics
+
 # Remote library imports
 from flask import Flask, request, make_response, jsonify
 from flask_restful import Resource
@@ -193,7 +196,7 @@ def sprints():
 ####>>>>GET<<<<####
     if request.method == 'GET':
         sprints = Sprint.query.all()
-        sprints_body_res = [sprint.to_dict() for sprint in sprints]
+        sprints_body_res = [sprint.to_dict(only=('id','start_date','end_date')) for sprint in sprints]
 
         res = make_response(
             sprints_body_res,
@@ -218,7 +221,7 @@ def sprints():
         )
     return res
 
-@app.route('/sprints/<int:id>',methods=['GET','PATCH'])
+@app.route('/sprints/<int:id>',methods=['GET','PATCH','DELETE'])
 def sprints_by_id(id):
     sprint = Sprint.query.filter(Sprint.id == id).first()
 ####>>>>GET_SINGLE<<<<####  
@@ -244,7 +247,27 @@ def sprints_by_id(id):
                 { 'errors': ['validation errors'] },
                 400
             )
+####
+    if request.method == 'DELETE':
+        db.session.delete(sprint)
+        db.session.commit()
+
+        res = make_response(
+            {},
+            204
+        )
+    
     return res
+
+####>>>>ANALYTICS<<<<####
+@app.route('/sprints/<int:sprint_id>/analytics', methods=['GET'])
+def get_sprint_analytics(sprint_id):
+    sprint = Sprint.query.get_or_404(sprint_id)
+    tickets = Ticket.query.filter(Ticket.sprint_id == sprint_id).all()
+
+    analytics = calculate_sprint_analytics(sprint, tickets)
+
+    return jsonify(analytics)
 
 ## _______________ TicketLog ROUTES _______________ ##
 @app.route('/ticket-logs',methods=['GET','POST'])

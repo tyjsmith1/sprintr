@@ -1,3 +1,5 @@
+/* --------------- ALL QUADRANTS --------------- */
+
 .sprint-div-container {
     display: grid;
     grid-template-columns: repeat(2, minmax(0,1fr));
@@ -42,3 +44,73 @@
         gap: 15px;
     }
 }
+
+/* --------------- Q1 --------------- */
+.Q1-container h3 {
+    margin-bottom: 20px;
+}
+
+.Q1-container button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.q1-title {
+    font-size: 20px;
+}
+
+.Q1-container button:hover {
+    background-color: #0056b3;
+}
+
+.Q1-container div {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.Q1-container .q1-analytics {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    font-size: 14px;
+    color: #333;
+}
+.Q1-container .q1-analytics div {
+    margin: 5px 0;
+}
+
+.Q1-container .loading, .Q1-container .error {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* --------------- Q2 --------------- */
+.Q2-container button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.Q2-container button:hover {
+    background-color: #0056b3;
+}
+
+/* --------------- Q3 --------------- */
+.q3-ul {
+    list-style: none;
+    padding: 0 ;
+}
+
+/* --------------- Q4 --------------- */
+
