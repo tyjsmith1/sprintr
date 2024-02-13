@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./NewTicketModal.css"
+import UserDropDownFilter from "../UserDropDownFilter";
 
-function NewTicketModal({toggleNewTicketModal}) {
+function NewTicketModal({toggleNewTicketModal, users}) {
 
     const [isClosing, setIsClosing] = useState(false);
 
@@ -28,6 +29,13 @@ function NewTicketModal({toggleNewTicketModal}) {
         setFormData(prevState => ({
             ...prevState,
             [name]: value
+        }))
+    }
+
+    function handleUserSelection(userId){
+        setFormData(prevState => ({
+            ...prevState,
+            assignedTo: userId
         }))
     }
 
@@ -73,124 +81,100 @@ function NewTicketModal({toggleNewTicketModal}) {
         <div className={`modal ${isClosing ? 'fade-out-modal' : ''}`}>
             <div className={`overlay ${isClosing ? 'fade-out-overlay' : ''}`}></div>
             <div className="modal-content">
-                <h2>New Ticket</h2>
-                <form onSubmit={handleSubmit}>
-                    <label>Ticket Title: </label>
-                    <input 
-                        className="input"
-                        type="text"
-                        placeholder="Ticket Title"
-                        value={formData.title}
-                        name="title"
-                        onChange={handleChange}
-                    />
-                    <br></br>
-                    <label>Urgency: </label>
-                    <select 
-                        className="input"
-                        name="urgency"
-                        value={formData.urgency}
-                        onChange={handleChange}
-                    >
-                        <option value="DEFAULT" disabled hidden>Please Choose...</option>
-                        <option value="high">High</option>
-                        <option value="med">Medium</option>
-                        <option value="low">Low</option>
-                    </select>
-                    <br></br>
-                    <label>Domain: </label>
-                    <select 
-                        className="input"
-                        name="category"
-                        value={formData.category}
-                        onChange={handleChange}
-                    >
-                        <option value="DEFAULT" disabled hidden>Please Choose...</option>
-                        <option value="frontend">Front End</option>
-                        <option value="backend">Back End</option>
-                    </select>
-                    <br></br>
-                    <label>Status: </label>
-                    <select 
-                        className="input"
-                        name="status"
-                        value={formData.status}
-                        onChange={handleChange}
-                    >
-                        <option value="DEFAULT" disabled hidden>Please Choose...</option>
-                        <option value="to_do">To Do</option>
-                        <option value="in_progress">In Progress</option>
-                        <option value="complete">Complete</option>
-                    </select>
-                    <br></br>
-                    <label>Story Points: </label>
-                    <select 
-                        className="input"
-                        name="storyPoints"
-                        value={formData.storyPoints}
-                        onChange={handleChange}
-                    >
-                        <option value="DEFAULT" disabled hidden>Please Choose...</option>
-                        <option value="1">1</option>
-                        <option value="5">5</option>
-                        <option value="8">8</option>
-                        <option value="13">13</option>
-                        <option value="20">20</option>
-                        <option value="40">40</option>
-                        <option value="100">100</option>
-                    </select>
-                    <textarea
-                        className="input"
-                        placeholder="Add Ticket Description Here"
-                        rows="4"
-                        cols="100"
-                        value={formData.body}
-                        name="body"
-                        onChange={handleChange}
-                    ></textarea>
-                    {/* Below this comment will be automated at some point */}
-                    <label>Assigned to: </label>
-                    <select 
-                        className="input"
-                        name="assignedTo"
-                        value={formData.assignedTo}
-                        onChange={handleChange}
-                    >
-                        <option value="DEFAULT" disabled hidden>Please Choose...</option>
-                        <option value="1">Tyler</option>
-                        <option value="2">Roberto</option>
-                        <option value="3">Justin</option>
-                        <option value="4">Jenny</option>
-                        <option value="5">Tim</option>
-                        <option value="6">Lisa</option>
-                        <option value="7">Amir</option>
-                        <option value="8">Corey</option>
-                        <option value="9">Art</option>
-                        <option value="10">Flynn</option>
-                    </select>
-                    <label>Author: </label>
-                    <select 
-                        className="input"
-                        name="author"
-                        value={formData.author}
-                        onChange={handleChange}
-                    >
-                        <option value="DEFAULT" disabled hidden >Please Choose...</option>
-                        <option value="1">Tyler</option>
-                        <option value="2">Roberto</option>
-                        <option value="3">Justin</option>
-                        <option value="4">Jenny</option>
-                        <option value="5">Tim</option>
-                        <option value="6">Lisa</option>
-                        <option value="7">Amir</option>
-                        <option value="8">Corey</option>
-                        <option value="9">Art</option>
-                        <option value="10">Flynn</option>
-                    </select>
-                    <br></br>
-                    <button className="close-modal" type="button" onClick={startCloseModal}>CLOSE</button>
-                    <button className="close-modal" type="submit">SUBMIT</button>
-                </form>
+                <div className="modal-header">
+                    <h2>New Ticket</h2>
+                </div>
+                <div className="modal-body">
+                    <form onSubmit={handleSubmit}>
+                        <label>Ticket Title: </label>
+                        <input 
+                            className="input"
+                            type="text"
+                            placeholder="Ticket Title"
+                            value={formData.title}
+                            name="title"
+                            onChange={handleChange}
+                        />
+                        <label>Urgency: </label>
+                        <select 
+                            className="input"
+                            name="urgency"
+                            value={formData.urgency}
+                            onChange={handleChange}
+                        >
+                            <option value="DEFAULT" disabled hidden>Please Choose...</option>
+                            <option value="high">High</option>
+                            <option value="med">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                        <label>Domain: </label>
+                        <select 
+                            className="input"
+                            name="category"
+                            value={formData.category}
+                            onChange={handleChange}
+                        >
+                            <option value="DEFAULT" disabled hidden>Please Choose...</option>
+                            <option value="frontend">Front End</option>
+                            <option value="backend">Back End</option>
+                        </select>
+                        <label>Status: </label>
+                        <select 
+                            className="input"
+                            name="status"
+                            value={formData.status}
+                            onChange={handleChange}
+                        >
+                            <option value="DEFAULT" disabled hidden>Please Choose...</option>
+                            <option value="to_do">To Do</option>
+                            <option value="in_progress">In Progress</option>
+                            <option value="complete">Complete</option>
+                        </select>
+                        <label>Story Points: </label>
+                        <select 
+                            className="input"
+                            name="storyPoints"
+                            value={formData.storyPoints}
+                            onChange={handleChange}
+                        >
+                            <option value="DEFAULT" disabled hidden>Please Choose...</option>
+                            <option value="1">1</option>
+                            <option value="5">5</option>
+                            <option value="8">8</option>
+                            <option value="13">13</option>
+                            <option value="20">20</option>
+                            <option value="40">40</option>
+                            <option value="100">100</option>
+                        </select>
+                        <textarea
+                            className="input"
+                            placeholder="Add Ticket Description Here"
+                            rows="4"
+                            cols="100"
+                            value={formData.body}
+                            name="body"
+                            onChange={handleChange}
+                        ></textarea>
+                        <label>Assigned to: </label>
+                        <UserDropDownFilter 
+                            users={users}
+                            onUserSelection={handleUserSelection}
+                            allOptionLabel="Please Choose..."
+                            selectedValue={formData.assignedTo}
+                        />
+                        <label>Author: </label>
+                        <UserDropDownFilter 
+                            users={users}
+                            onUserSelection={handleUserSelection}
+                            allOptionLabel="Please Choose..."
+                            selectedValue={formData.author}
+                        />
+                    </form>
+                <div className="modal-footer">
+                    <button className="submit-button" type="submit">SUBMIT</button>
+                    <button className="close-button" type="button" onClick={startCloseModal}>CLOSE</button>
+                </div>
+            </div>
             </div>
         </div>
     )

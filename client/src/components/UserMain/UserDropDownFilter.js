@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function UserDropDownFilter({onUserSelection, users, selectedValue, allOptionLabel = "All User Tickets"}){
+function UserDropDownFilter({onUserSelection, users, selectedValue, allOptionLabel = "All Users"}){
 
     return (
         <select className="assign-dropdown" onChange={e => onUserSelection(e.target.value)} value={selectedValue || ''}>
