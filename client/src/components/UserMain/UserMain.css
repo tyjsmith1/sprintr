@@ -9,7 +9,6 @@
     margin: 0 10px;
     display: flex;
     flex-direction: column;
-    /*test*/
     background-color: rgba(82, 82, 82, 0.1);
     backdrop-filter: blur(100px);
     border-radius: 10px;
@@ -24,7 +23,6 @@
     width: 400px;
     min-width: 100px;
     max-width: 500px;
-    /* flex-grow: 1; */
 }
 
 .ticket-category h2 {
@@ -48,6 +46,14 @@
     font-size: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.5);
     border: 1px solid rgba(255, 255, 255,0.1);
+}
+
+.ticket-category h2,
+.ticket-category ul li,
+.trash,
+.new-ticket-button p,
+.add-icon {
+    transition: all 0.2s ease;
 }
 
 .trash {
@@ -92,7 +98,8 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.ticket-category:hover {
+.ticket-category:hover,
+.ticket-item:hover {
     /* transform: translateY(-2px); */
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     background-color: rgba(255,255,255,0.05);
@@ -104,6 +111,30 @@
 
 .ticket-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    background-color: rgba(255,255,255,0.4);
+}
+
+@media (max-width: 768px) {
+    .ticket-category-container {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .ticket-category {
+        width: auto; 
+        margin: 10px 0;
+        max-height: none;
+    }
+
+    .ticket-category ul li,
+    .trash,
+    .new-ticket-button p,
+    .add-icon {
+        font-size: smaller;
+    }
+}
+
+@media (max-width: 480px) {
+    .ticket-category {
+        padding: 15px;
+    }
 }

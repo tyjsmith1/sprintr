@@ -76,7 +76,7 @@ function Q4Contributions() {
 
     return (
         <div>
-            <h3>Contributor Details</h3>
+            <h3>Contributor Story Point Breakdown</h3>
             <Bar
                 data={chartData}
                 options={{

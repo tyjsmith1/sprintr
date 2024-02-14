@@ -9,36 +9,42 @@
 }
 
 body {
-  /* background: url('./components/Assets/pencils.jpg') no-repeat; */
-  /* background: url('./components/Assets/Num2.jpg') no-repeat; */
-  background: url('./components/Assets/Num2grain.jpg') no-repeat;
-  /* background: url('./components/Assets/Num3.jpg') no-repeat; */
-  /* background: url('./components/Assets/Dark\ Retro\ Warm\ Glow.jpg') no-repeat; */
-  /* background: url('./components/Assets/blackSand.jpg') no-repeat; */
-  /* background: url('./components/Assets/underwater.jpg') no-repeat; */
-  /* background: url('./components/Assets/whitewall.jpg') no-repeat; */
+  background: url('./components/Assets/Num2grain.jpg') no-repeat fixed;
   background-size: cover;
   background-position: center;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 60px;
 }
-
-/* .svg {
-  background: url('./components/Assets/sprint.svg') no-repeat ;
-  z-index: 99;
-} */
-
- /* body .login-div {
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  display: flex;
-}  */
-
 
 .root-layout {
   display: flex;
   justify-content: space-evenly;
+}
+
+@media (max-width: 768px) {
+  .root-layout {
+    flex-direction: column;
+  }
+
+  body, button, input, textarea {
+    font-size: 14px;
+  }
+
+  body {
+    background-size: auto 100%;
+    background-position: top center;
+  }
+}
+
+@media (max-width: 480px) {
+  body, button, input, textarea {
+    font-size: 12px;
+  }
+  
+  .root-layout {
+    padding: 10px;
+  }
 }
