@@ -3,6 +3,7 @@ import './About.css'
 import { ReactComponent as Sprint } from './sprint.svg'
 import { ReactComponent as Sprint2 } from './sprint2.svg'
 import { ReactComponent as Sprint3 } from './sprint3.svg'
+import { ReactComponent as Sprint4 } from './sprint4.svg'
 
 
 function About() {
@@ -20,6 +21,14 @@ function About() {
             </div>
 
             <div className="feature-section">
+                <div className="feature-text">
+                    <h2 className="about-heading">Sprint Management Insights</h2>
+                    <p>Unlock the full potential of your sprints with our advanced sprint management features. Gain macro-level views of your sprint analytics to make data-driven decisions. Monitor the current sprint pace, estimate completion timelines, and get a detailed breakdown of progress by each engineer.</p>
+                </div>
+                <Sprint4 className="feature-svg" />
+            </div>
+
+            <div className="feature-section">
                 <Sprint2 className="feature-svg" />
                 <div className="feature-text">
                     <h2 className="about-heading">Advanced Filtering and Assignment</h2>
@@ -28,11 +37,11 @@ function About() {
             </div>
 
             <div className="feature-section">
-                <Sprint3 className="feature-svg" />
                 <div className="feature-text">
                     <h2 className="about-heading">Unified Task Management</h2>
-                    <p>Say goodbye to juggling multiple platforms. Our KanBan page offers a comprehensive view of all tasks, neatly categorized by status: To Do, In Progress, and Completed. With drag-and-drop simplicity, managing your projects has never been easier.</p>
+                    <p>Say goodbye to juggling multiple platforms. Our KanBan page offers a comprehensive view of all tasks, neatly categorized by status: To Do, In Progress, and Completed. Managing your projects has never been easier.</p>
                 </div>
+                <Sprint3 className="feature-svg" />
             </div>
 
             <h2 className="about-heading">Why Choose Sprintr?</h2>
