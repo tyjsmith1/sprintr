@@ -381,5 +381,21 @@ def contributors_by_id(id):
     )
     return res
 
+## _______________ Analytics ROUTES _______________ ##
+@app.route('/contributor-data')
+def get_contributor_data():
+    joined_data = db.session.query(Ticket, User).join(User, Ticket.assignee_user_id == User.id).all()
+    result = []
+    for ticket, user in joined_data:
+        result.append({
+            'ticket_id': ticket.id,
+            'user_id': user.id,
+            'username': user.username,
+            'storypoints': ticket.story_points,
+            'ticket_status': ticket.status
+        })
+    return jsonify(result)
+
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
