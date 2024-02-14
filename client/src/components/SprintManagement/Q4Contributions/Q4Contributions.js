@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Bar } from 'react-chartjs-2'
-import Chart from 'chart.js/auto'
+import Chart from 'chart.js/auto';
+
+Chart.defaults.color = "#f7f1cb";
 
 function Q4Contributions() {
+
     const [chartData, setChartData] = useState({
         labels: [],
         datasets: [
@@ -14,7 +17,7 @@ function Q4Contributions() {
             {
                 label: 'Incomplete',
                 data: [],
-                backgroundColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(181, 107, 222, 0.8)',
             }
         ]
     })
@@ -55,12 +58,12 @@ function Q4Contributions() {
                 {
                     label: 'Complete',
                     data: completedDataArray,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)'
+                    backgroundColor: 'rgba(7, 155, 190, 0.75)'
                 },
                 {
                     label: 'Incomplete',
                     data: incompleteDataArray,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                    backgroundColor: 'rgba(255, 57, 42, 0.75)'
                 }
             ]
         })
@@ -80,7 +83,8 @@ function Q4Contributions() {
                     responsive: true,
                     scales: {
                         x: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            stacked: true
                         },
                         y: {
                             beginAtZero: true,

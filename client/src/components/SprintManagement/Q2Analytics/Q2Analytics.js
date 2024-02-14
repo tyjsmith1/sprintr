@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Pie } from 'react-chartjs-2'
 import Chart from 'chart.js/auto'
 
+Chart.defaults.color = "#f7f1cb";
+
 function Q2Analytics({incompleteTickets, completeTickets}) {
     const [chartData, setChartData] = useState({
         labels: [],
@@ -67,12 +69,12 @@ function Q2Analytics({incompleteTickets, completeTickets}) {
                         incompleteTickets.reduce((acc,ticket) => acc + ticket.story_points, 0)
                     ],
                 backgroundColor: [
-                    'rgba(54,162,235,0.6)',
-                    'rgba(255,206,86,0.6)'
+                    'rgba(7, 155, 190, 0.75)',
+                    'rgba(255, 57, 42, 0.75)'
                 ],
                 borderColor: [
-                    'rgba(54,162,235,1)',
-                    'rgba(255,206,86,1)'
+                    'rgba(7, 155, 190, 1)',
+                    'rgba(255, 57, 42, 1)'
                 ],
                 borderWidth: 1,
                 hoverOffset: 10,
