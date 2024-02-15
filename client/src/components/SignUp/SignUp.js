@@ -52,6 +52,7 @@ function SignUp() {
         if(isValid) {
             const userData = {
                 username: signupFormData.username,
+                password: signupFormData.password,
                 role: "backend",
                 user_capacity: 50,
             }

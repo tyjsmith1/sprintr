@@ -2,6 +2,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
 from datetime import date
+from werkzeug.security import generate_password_hash
 
 from config import db
 
@@ -14,6 +15,10 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String, nullable=False)
     role = db.Column(db.String, nullable=False)
     user_capacity = db.Column(db.Integer)
+    password_hash = db.Column(db.String(128))
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
     #________RELATIONSHIPS________#
     assigned_tickets = db.relationship("Ticket", foreign_keys="[Ticket.assignee_user_id]", back_populates="assignee")

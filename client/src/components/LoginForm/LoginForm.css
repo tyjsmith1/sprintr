@@ -21,27 +21,6 @@
     margin: 30px 0;
 }
 
-.wrapper .remember-forgot {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14.5px;
-    margin: -15px 0 15px;
-}
-
-.remember-forgot label input {
-    accent-color: rgb(255, 232, 201);
-    margin-right: 4px;
-}
-
-.remember-forgot a {
-    color: rgb(255, 232, 201);
-    text-decoration: none;
-}
-
-.remember-forgot a:hover {
-    text-decoration: underline;
-}
-
 .input-box input {
     width: 100%;
     height: 100%;

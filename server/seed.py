@@ -16,20 +16,25 @@ f = Faker()
 
 def create_users():
     users_data = [
-        {"id": 1, "username": "Tyler", "role": "backend", "user_capacity": 40},
-        {"id": 2, "username": "Joel", "role": "frontend", "user_capacity": 40},
-        {"id": 3, "username": "Lisa", "role": "frontend", "user_capacity": 40},
-        {"id": 4, "username": "Nate", "role": "backend", "user_capacity": 40},
-        {"id": 5, "username": "Roberto", "role": "sales", "user_capacity": 40},
-        {"id": 6, "username": "Cory", "role": "sales", "user_capacity": 40},
-        {"id": 7, "username": "Dana", "role": "support", "user_capacity": 40},
-        {"id": 8, "username": "Alysha", "role": "support", "user_capacity": 40},
-        {"id": 9, "username": "Flynn", "role": "leadership", "user_capacity": 40},
-        {"id": 10, "username": "Stephanie", "role": "leadership", "user_capacity": 40},
+        {"id": 1, "username": "Tyler", "role": "backend", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 2, "username": "Joel", "role": "frontend", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 3, "username": "Lisa", "role": "frontend", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 4, "username": "Nate", "role": "backend", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 5, "username": "Roberto", "role": "sales", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 6, "username": "Cory", "role": "sales", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 7, "username": "Dana", "role": "support", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 8, "username": "Alysha", "role": "support", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 9, "username": "Flynn", "role": "leadership", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 10, "username": "Stephanie", "role": "leadership", "user_capacity": 40, "password": "defaultPassword"},
     ]
 
     for user_data in users_data:
-        user = User(**user_data)
+        user = User(
+            username = user_data["username"],
+            role = user_data["role"],
+            user_capacity = user_data["user_capacity"]
+        )
+        user.set_password(user_data["password"])
         db.session.add(user)
 
 def create_sprint():

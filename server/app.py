@@ -6,9 +6,10 @@
 from sprint_analytics import calculate_sprint_analytics
 
 # Remote library imports
-from flask import Flask, request, make_response, jsonify
+from flask import Flask, request, make_response, jsonify, session
 from flask_restful import Resource
 from datetime import date
+from werkzeug.security import check_password_hash, generate_password_hash
 
 # Local imports
 from config import app, db, api
@@ -35,26 +36,32 @@ def get_users():
 ####>>>>POST<<<<####   
     elif request.method == 'POST':
         form_data = request.get_json()
-        new_user = User(
-            username = form_data['username'],
-            role = form_data['role'],
-            user_capacity = form_data['user_capacity']
-        )
-        db.session.add(new_user)
-        db.session.commit()
+        username = form_data['username']
+        password = form_data['password']
+        role = form_data.get('role','backend')
+        user_capacity = form_data.get('user_capacity', 50)
 
-        formatted_user_response = new_user.to_dict(
-            rules=(
-                "-assigned_tickets",
-                "-authored_tickets",
-                "-ticket_logs",
-                "-ticket_contributors",
-                ))
+        new_user = User(username=username, role=role, user_capacity=user_capacity)
+        new_user.set_password(password)
+        try:
+            db.session.add(new_user)
+            db.session.commit()
 
-        res = make_response(
-            formatted_user_response,
-            201
-        )
+            formatted_user_response = new_user.to_dict(
+                rules=(
+                    "-assigned_tickets",
+                    "-authored_tickets",
+                    "-ticket_logs",
+                    "-ticket_contributors",
+                    ))
+
+            res = make_response(
+                formatted_user_response,
+                201
+            )
+        except Exception as e:
+            db.session.rollback()
+            res = jsonify({"error": "Failed to create user", "message": str(e)}), 500
     return res
 
 @app.route('/users/<int:id>', methods=['GET','PATCH'])
@@ -91,6 +98,21 @@ def users_by_id(id):
                 400
             )
     return res
+
+####>>>>LOGIN -- POST<<<<####   
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data['username']
+    password = data['password']
+
+    user = User.query.filter_by(username=username).first()
+
+    if user and check_password_hash(user.password_hash, password):
+        session['user_id'] = user.id
+        return jsonify({"message": "Login successful"}), 200
+    return jsonify({"message": "Invalid username or password"}), 401
+
 
 ## _______________ Ticket ROUTES _______________ ##
 @app.route('/tickets', methods=['GET','POST'])
