@@ -45,15 +45,15 @@ function NewTicketModal({toggleNewTicketModal, users}) {
         const isEmpty = Object.values(formData).some(value => value.trim() === '');
 
         if (isEmpty) {
-        alert('Please fill out all fields.');
-        return; 
+            alert('Please fill out all fields.');
+            return; 
         }
         
         const ticketData = {
             assignee_user_id: formData.assignedTo,
             author_user_id: formData.author,
             body: formData.body,
-            category: formData.category,
+            category: 'feature',
             completed_at: null,
             created_at: new Date().toISOString().split('T')[0],
             sprint_id: 1,
@@ -169,9 +169,9 @@ function NewTicketModal({toggleNewTicketModal, users}) {
                             allOptionLabel="Please Choose..."
                             selectedValue={formData.author}
                         />
+                    <button className="submit-button" type="submit">SUBMIT</button>
                     </form>
                 <div className="modal-footer">
-                    <button className="submit-button" type="submit">SUBMIT</button>
                     <button className="close-button" type="button" onClick={startCloseModal}>CLOSE</button>
                 </div>
             </div>
