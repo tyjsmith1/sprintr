@@ -27,6 +27,10 @@ Backend (Flask): http://localhost:5555
 
 Additionally, you will find a postman collection in the main directory named sprintr.postman_collection.json.
 
+Lastly, to log in you may either use the following credentials or create another user via the sign up route.
+- username: Tyler
+- password: defaultPassword
+
 ## Wireframe
 ![image](https://github.com/tyjsmith1/sprintr/assets/95344047/48a343c2-16df-46db-947f-cce06483d641)
 
