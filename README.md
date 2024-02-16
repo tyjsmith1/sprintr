@@ -2,6 +2,30 @@
 
 Welcome to Sprintr, an innovative agile project management tool designed to streamline the workflow of tech teams. At the heart of Sprintr lies a unique feature: an intelligent auto-assignment system that dynamically matches tasks with team members based on their skills, focus areas, and current workload. This is achieved through a sophisticated backend logic implemented in Python and Flask, ensuring a seamless and efficient task distribution process. On the frontend, Sprintr utilizes React, providing a responsive and user-friendly interface that facilitates easy tracking and management of tasks, sprints, and team collaboration. The data management is elegantly handled by SQLAlchemy, which offers a powerful and flexible toolkit for SQL database interaction. Our aim with Sprintr is to revolutionize how tech teams approach project management by automating the allocation process, thereby allowing team members to focus more on innovation and less on administrative overhead. Dive into the world of Sprintr where managing tech projects becomes as agile as your team’s aspirations.
 
+## Setting Up and Running the Project Locally
+Prerequisites
+Before you begin, ensure you have the following installed on your system:
+
+- Python and Pipenv
+- Node.js and npm
+- Flask (for Python)
+
+I have provided a setup.sh script that automates the setup process. To run this script, follow these steps:
+
+Make the script executable (if it's not already):
+- chmod +x setup.sh
+
+Execute the script:
+- ./setup.sh
+
+This script will install all required dependencies for both the backend and frontend parts of the project, start the backend server, initialize and upgrade the database, and start the frontend development server.
+
+After completing the setup, the backend and frontend servers should be running on your local machine. Here are the default URLs where you can access them:
+
+Frontend (React): http://localhost:3000
+Backend (Flask): http://localhost:5555
+
+Additionally, you will find a postman collection in the main directory named sprintr.postman_collection.json.
 
 ## Wireframe
 ![image](https://github.com/tyjsmith1/sprintr/assets/95344047/48a343c2-16df-46db-947f-cce06483d641)
