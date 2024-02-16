@@ -99,6 +99,12 @@ def users_by_id(id):
             )
     return res
 
+#########################################################
+#                                                       #
+#                   DEMO SECTION                        #
+#                                                       #
+#########################################################
+
 ####>>>>LOGIN -- POST<<<<####   
 @app.route('/login', methods=['POST'])
 def login():
@@ -281,6 +287,13 @@ def sprints_by_id(id):
     
     return res
 
+#########################################################
+#                                                       #
+#                   DEMO SECTION                        #
+#                                                       #
+#########################################################
+
+
 ####>>>>ANALYTICS<<<<####
 @app.route('/sprints/<int:sprint_id>/analytics', methods=['GET'])
 def get_sprint_analytics(sprint_id):
@@ -402,6 +415,13 @@ def contributors_by_id(id):
         202
     )
     return res
+
+#########################################################
+#                                                       #
+#                   DEMO SECTION                        #
+#                                                       #
+#########################################################
+
 
 ## _______________ Analytics ROUTES _______________ ##
 @app.route('/contributor-data')

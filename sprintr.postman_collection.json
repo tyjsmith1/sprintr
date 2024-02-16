@@ -1,0 +1,573 @@
+{
+	"info": {
+		"_postman_id": "e0e2b80b-3a98-4745-8619-cf57f30f7c3d",
+		"name": "sprintr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30985006"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "backend",
+									"disabled": true
+								},
+								{
+									"key": "user_capacity",
+									"value": "40",
+									"disabled": true
+								},
+								{
+									"key": "user_focus",
+									"value": "idk",
+									"disabled": true
+								},
+								{
+									"key": "usermame",
+									"value": "Test",
+									"disabled": true
+								},
+								{
+									"key": "id",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role\": \"backend\",\n    \"user_capacity\": 10,\n    \"user_focus\": \"idk\",\n    \"username\": \"Test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users/<int:id>",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_capacity\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket",
+			"item": [
+				{
+					"name": "tickets",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/tickets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "Tyler",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "sales",
+									"disabled": true
+								},
+								{
+									"key": "user_focus",
+									"value": "idk",
+									"disabled": true
+								},
+								{
+									"key": "user_capacity",
+									"value": "10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tickets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Something Broke\",\n    \"status\": \"open\",\n    \"category\": \"frontend\",\n    \"body\": \"something broke on the front end and someone needs to fix it asap\",\n    \"urgency\": \"high\",\n    \"story_points\": 4,\n    \"assignee_user_id\": 1,\n    \"author_user_id\": 2,\n    \"sprint_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/tickets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"tickets"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "Tyler",
+									"disabled": true
+								},
+								{
+									"key": "role",
+									"value": "sales",
+									"disabled": true
+								},
+								{
+									"key": "user_focus",
+									"value": "idk",
+									"disabled": true
+								},
+								{
+									"key": "user_capacity",
+									"value": "10",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tickets/<int:id>",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/tickets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"tickets",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tickets/<int:id>",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 9,\n    \"status\": \"complete\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/tickets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"tickets",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sprints",
+			"item": [
+				{
+					"name": "sprints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5555/sprints",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sprints",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5555/sprints",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"sprints"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sprints/<int:id>",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/sprints/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"sprints",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sprint mgmt analytics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5555/sprints/1/analytics",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"sprints",
+								"1",
+								"analytics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sprints",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5555/sprints/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"sprints",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket Log",
+			"item": [
+				{
+					"name": "ticket-logs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5555/ticket-logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"ticket-logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket-logs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticket_id\": 1,\n    \"author_user_id\": 1,\n    \"comment_text\": \"testing out the comments sections\",\n    \"status\": \"going to get rid of this column\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/ticket-logs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"ticket-logs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket-logs/<int:id>",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5555/ticket-logs/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"ticket-logs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket Contributor",
+			"item": [
+				{
+					"name": "ticket-contributors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5555/ticket-contributors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"ticket-contributors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket-contributors/<int:id>",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5555/ticket-contributors/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"ticket-contributors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ticket-contributors",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticket_id\": 1,\n    \"user_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5555/ticket-contributors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5555",
+							"path": [
+								"ticket-contributors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Analytics",
+			"item": [
+				{
+					"name": "contributor",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
