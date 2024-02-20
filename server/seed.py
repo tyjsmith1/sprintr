@@ -16,16 +16,16 @@ f = Faker()
 
 def create_users():
     users_data = [
-        {"id": 1, "username": "Tyler", "role": "backend", "user_capacity": 40, "password": "defaultPassword"},
-        {"id": 2, "username": "Joel", "role": "frontend", "user_capacity": 40, "password": "defaultPassword"},
-        {"id": 3, "username": "Lisa", "role": "frontend", "user_capacity": 40, "password": "defaultPassword"},
-        {"id": 4, "username": "Nate", "role": "backend", "user_capacity": 40, "password": "defaultPassword"},
-        {"id": 5, "username": "Roberto", "role": "sales", "user_capacity": 40, "password": "defaultPassword"},
-        {"id": 6, "username": "Cory", "role": "sales", "user_capacity": 40, "password": "defaultPassword"},
-        {"id": 7, "username": "Dana", "role": "support", "user_capacity": 40, "password": "defaultPassword"},
-        {"id": 8, "username": "Alysha", "role": "support", "user_capacity": 40, "password": "defaultPassword"},
-        {"id": 9, "username": "Flynn", "role": "leadership", "user_capacity": 40, "password": "defaultPassword"},
-        {"id": 10, "username": "Stephanie", "role": "leadership", "user_capacity": 40, "password": "defaultPassword"},
+        {"id": 1, "username": "Tyler", "role": "backend", "user_capacity": 50, "password": "defaultPassword"},
+        {"id": 2, "username": "Joel", "role": "frontend", "user_capacity": 50, "password": "defaultPassword"},
+        {"id": 3, "username": "Lisa", "role": "frontend", "user_capacity": 50, "password": "defaultPassword"},
+        {"id": 4, "username": "Nate", "role": "backend", "user_capacity": 50, "password": "defaultPassword"},
+        {"id": 5, "username": "Roberto", "role": "sales", "user_capacity": 50, "password": "defaultPassword"},
+        {"id": 6, "username": "Cory", "role": "sales", "user_capacity": 50, "password": "defaultPassword"},
+        {"id": 7, "username": "Dana", "role": "support", "user_capacity": 50, "password": "defaultPassword"},
+        {"id": 8, "username": "Alysha", "role": "support", "user_capacity": 50, "password": "defaultPassword"},
+        {"id": 9, "username": "Flynn", "role": "leadership", "user_capacity": 50, "password": "defaultPassword"},
+        {"id": 10, "username": "Stephanie", "role": "leadership", "user_capacity": 50, "password": "defaultPassword"},
     ]
 
     for user_data in users_data:
@@ -49,25 +49,25 @@ def create_sprint():
 
 def create_tasks():
     tasks = [
-        {"title": "Implement User Authentication", "status": "in_progress", "category": "feature", "body": "Implement secure user login and registration", "urgency": "high", "story_points": 8, "assignee_user_id": 1, "author_user_id": 9},
-        {"title": "Database Schema Design", "status": "to_do", "category": "task", "body": "Design initial database schema for the project", "urgency": "high", "story_points": 5, "assignee_user_id": 4, "author_user_id": 9},
-        {"title": "Setup Continuous Integration", "status": "to_do", "category": "task", "body": "Setup CI pipeline for automated testing", "urgency": "med", "story_points": 13, "assignee_user_id": 2, "author_user_id": 10},
+        {"title": "Implement User Authentication", "status": "complete", "category": "feature", "body": "Implement secure user login and registration", "urgency": "high", "story_points": 8, "assignee_user_id": 1, "author_user_id": 9},
+        {"title": "Database Schema Design", "status": "complete", "category": "task", "body": "Design initial database schema for the project", "urgency": "high", "story_points": 5, "assignee_user_id": 4, "author_user_id": 9},
+        {"title": "Setup Continuous Integration", "status": "complete", "category": "task", "body": "Setup CI pipeline for automated testing", "urgency": "med", "story_points": 13, "assignee_user_id": 2, "author_user_id": 10},
         {"title": "Frontend Framework Selection", "status": "complete", "category": "research", "body": "Evaluate and select a frontend framework", "urgency": "low", "story_points": 3, "assignee_user_id": 3, "author_user_id": 10},
-        {"title": "Implement Landing Page", "status": "in_progress", "category": "feature", "body": "Create the landing page according to the design specs", "urgency": "high", "story_points": 8, "assignee_user_id": 2, "author_user_id": 10},
+        {"title": "Implement Landing Page", "status": "complete", "category": "feature", "body": "Create the landing page according to the design specs", "urgency": "high", "story_points": 8, "assignee_user_id": 2, "author_user_id": 10},
         {"title": "User Feedback System", "status": "to_do", "category": "feature", "body": "Develop a system for collecting user feedback", "urgency": "med", "story_points": 5, "assignee_user_id": 3, "author_user_id": 9},
-        {"title": "Implement Email Service", "status": "to_do", "category": "task", "body": "Setup an email service for notifications", "urgency": "med", "story_points": 3, "assignee_user_id": 4, "author_user_id": 10},
+        {"title": "Implement Email Service", "status": "complete", "category": "task", "body": "Setup an email service for notifications", "urgency": "med", "story_points": 3, "assignee_user_id": 4, "author_user_id": 10},
         {"title": "Optimize Database Queries", "status": "in_progress", "category": "optimization", "body": "Review and optimize current database queries for performance", "urgency": "high", "story_points": 13, "assignee_user_id": 1, "author_user_id": 9},
         {"title": "Refactor Authentication Logic", "status": "complete", "category": "refactor", "body": "Refactor the existing authentication logic to improve security", "urgency": "high", "story_points": 8, "assignee_user_id": 4, "author_user_id": 9},
         {"title": "Implement Cache Strategy", "status": "to_do", "category": "task", "body": "Design and implement a caching strategy for the application", "urgency": "med", "story_points": 5, "assignee_user_id": 1, "author_user_id": 10},
-        {"title": "Automate Deployment Process", "status": "to_do", "category": "task", "body": "Automate the current manual deployment process", "urgency": "med", "story_points": 8, "assignee_user_id": 2, "author_user_id": 9},
-        {"title": "Security Audit", "status": "to_do", "category": "task", "body": "Conduct a security audit to identify potential vulnerabilities", "urgency": "high", "story_points": 13, "assignee_user_id": 3, "author_user_id": 10},
+        {"title": "Automate Deployment Process", "status": "complete", "category": "task", "body": "Automate the current manual deployment process", "urgency": "med", "story_points": 8, "assignee_user_id": 2, "author_user_id": 9},
+        {"title": "Security Audit", "status": "complete", "category": "task", "body": "Conduct a security audit to identify potential vulnerabilities", "urgency": "high", "story_points": 13, "assignee_user_id": 3, "author_user_id": 10},
         {"title": "User Profile Management", "status": "in_progress", "category": "feature", "body": "Develop the user profile management feature", "urgency": "med", "story_points": 8, "assignee_user_id": 2, "author_user_id": 9},
-        {"title": "Implement Logging Framework", "status": "to_do", "category": "task", "body": "Set up a logging framework for backend services", "urgency": "low", "story_points": 3, "assignee_user_id": 4, "author_user_id": 9},
+        {"title": "Implement Logging Framework", "status": "complete", "category": "task", "body": "Set up a logging framework for backend services", "urgency": "low", "story_points": 3, "assignee_user_id": 4, "author_user_id": 9},
         {"title": "Responsive Design for Mobile", "status": "complete", "category": "feature", "body": "Ensure the website is responsive and mobile-friendly", "urgency": "high", "story_points": 5, "assignee_user_id": 3, "author_user_id": 10},
-        {"title": "API Rate Limiting", "status": "to_do", "category": "feature", "body": "Implement rate limiting on the public API to prevent abuse", "urgency": "med", "story_points": 8, "assignee_user_id": 1, "author_user_id": 9},
-        {"title": "Setup Monitoring Tools", "status": "to_do", "category": "task", "body": "Setup monitoring and alerting for system health", "urgency": "med", "story_points": 13, "assignee_user_id": 4, "author_user_id": 10},
+        {"title": "API Rate Limiting", "status": "complete", "category": "feature", "body": "Implement rate limiting on the public API to prevent abuse", "urgency": "med", "story_points": 8, "assignee_user_id": 1, "author_user_id": 9},
+        {"title": "Setup Monitoring Tools", "status": "complete", "category": "task", "body": "Setup monitoring and alerting for system health", "urgency": "med", "story_points": 13, "assignee_user_id": 4, "author_user_id": 10},
         {"title": "Code Review Process", "status": "in_progress", "category": "process", "body": "Establish a formal code review process", "urgency": "low", "story_points": 2, "assignee_user_id": 1, "author_user_id": 9},
-        {"title": "Documentation Standards", "status": "to_do", "category": "task", "body": "Define standards for code documentation", "urgency": "low", "story_points": 1, "assignee_user_id": 2, "author_user_id": 10},
+        {"title": "Documentation Standards", "status": "complete", "category": "task", "body": "Define standards for code documentation", "urgency": "low", "story_points": 1, "assignee_user_id": 2, "author_user_id": 10},
         {"title": "Frontend Testing Framework", "status": "complete", "category": "task", "body": "Select and implement a testing framework for the frontend", "urgency": "med", "story_points": 5, "assignee_user_id": 3, "author_user_id": 9}
     ]
 
