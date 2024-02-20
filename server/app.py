@@ -6,10 +6,11 @@
 from sprint_analytics import calculate_sprint_analytics
 
 # Remote library imports
-from flask import Flask, request, make_response, jsonify, session
+from flask import Flask, request, make_response, jsonify, session, Response, render_template, redirect, url_for, flash, abort
 from flask_restful import Resource
 from datetime import date
 from werkzeug.security import check_password_hash, generate_password_hash
+from flask_login import login_user, login_required, logout_user
 
 # Local imports
 from config import app, db, api
@@ -24,6 +25,7 @@ def index():
 
 ## _______________ USER ROUTES _______________ ##
 @app.route('/users', methods = ['GET','POST'])
+@login_required
 def get_users():
 ####>>>>GET<<<<####
     if request.method == 'GET':
@@ -65,6 +67,7 @@ def get_users():
     return res
 
 @app.route('/users/<int:id>', methods=['GET','PATCH'])
+@login_required
 def users_by_id(id):
     user = User.query.filter(User.id == id).first()
 
@@ -114,14 +117,21 @@ def login():
 
     user = User.query.filter_by(username=username).first()
 
-    if user and check_password_hash(user.password_hash, password):
-        session['user_id'] = user.id
+    if user and user.check_password(password):
+        login_user(user)
         return jsonify({"message": "Login successful"}), 200
     return jsonify({"message": "Invalid username or password"}), 401
 
+####>>>>LOGOUT -- POST<<<<#### 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return jsonify({"message": "You have been logged out."}), 200
 
 ## _______________ Ticket ROUTES _______________ ##
 @app.route('/tickets', methods=['GET','POST'])
+@login_required
 def tickets():
 ####>>>>GET<<<<####
     if request.method == 'GET':
@@ -161,6 +171,7 @@ def tickets():
     return res
 
 @app.route('/tickets/<int:id>', methods=['GET','DELETE','PATCH'])
+@login_required
 def ticket_by_id(id):
 ####>>>>GET<<<<####
     if request.method == 'GET':
@@ -220,6 +231,7 @@ def ticket_by_id(id):
 
 ## _______________ Sprint ROUTES _______________ ##
 @app.route('/sprints', methods=['GET','POST'])
+@login_required
 def sprints():
 ####>>>>GET<<<<####
     if request.method == 'GET':
@@ -250,6 +262,7 @@ def sprints():
     return res
 
 @app.route('/sprints/<int:id>',methods=['GET','PATCH','DELETE'])
+@login_required
 def sprints_by_id(id):
     sprint = Sprint.query.filter(Sprint.id == id).first()
 ####>>>>GET_SINGLE<<<<####  
@@ -296,6 +309,7 @@ def sprints_by_id(id):
 
 ####>>>>ANALYTICS<<<<####
 @app.route('/sprints/<int:sprint_id>/analytics', methods=['GET'])
+@login_required
 def get_sprint_analytics(sprint_id):
     sprint = Sprint.query.get_or_404(sprint_id)
     tickets = Ticket.query.filter(Ticket.sprint_id == sprint_id).all()
@@ -306,6 +320,7 @@ def get_sprint_analytics(sprint_id):
 
 ## _______________ TicketLog ROUTES _______________ ##
 @app.route('/ticket-logs',methods=['GET','POST'])
+@login_required
 def ticket_logs():
 ####>>>>GET<<<<####
     if request.method == 'GET':
@@ -338,6 +353,7 @@ def ticket_logs():
     return res
 
 @app.route('/ticket-logs/<int:id>', methods = ['GET','DELETE'])
+@login_required
 def ticket_log_by_id(id):
 ####>>>>GET<<<<####
     if request.method == 'GET':
@@ -374,6 +390,7 @@ def ticket_log_by_id(id):
 
 ## _______________ TicketContributors ROUTES _______________ ##
 @app.route('/ticket-contributors', methods=['GET','POST'])
+@login_required
 def ticket_contributors():
 ####>>>>GET<<<<####
     if request.method == 'GET':
@@ -404,6 +421,7 @@ def ticket_contributors():
     return res
 
 @app.route('/ticket-contributors/<int:id>', methods=['DELETE'])
+@login_required
 def contributors_by_id(id):
 ####>>>>DELETE<<<<####
     contributor = TicketContributor.query.filter(TicketContributor.id == id).first()
@@ -425,6 +443,7 @@ def contributors_by_id(id):
 
 ## _______________ Analytics ROUTES _______________ ##
 @app.route('/contributor-data')
+@login_required
 def get_contributor_data():
     joined_data = db.session.query(Ticket, User).join(User, Ticket.assignee_user_id == User.id).all()
     result = []

@@ -2,30 +2,35 @@ import React, {useState} from "react"
 import './LoginForm.css'
 import { FaUser,FaLock } from "react-icons/fa"
 import { NavLink, useNavigate } from "react-router-dom"
+import { useAuth } from '../../AuthContext';
 
 function LoginForm(){
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    const { login } = useAuth()
 
     async function handleLogin(e) {
         e.preventDefault()
         try {
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({username, password})
-            })
+            // const response = await fetch('/login', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({username, password})
+            // })
 
-            if (response.ok) {
-                navigate('/dashboard')
-            } else {
-                const errorData = await response.json()
-                alert(`Login failed! ${errorData.message}`)
-            }
+            // if (response.ok) {
+            //     navigate('/dashboard')
+            // } else {
+            //     const errorData = await response.json()
+            //     alert(`Login failed! ${errorData.message}`)
+            // }
+            await login({ username, password })
+            navigate('/dashboard')
+        
         } catch (error) {
             alert('Login failed! Please try again.')
         }

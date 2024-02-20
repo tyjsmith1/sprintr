@@ -2,12 +2,17 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
 from datetime import date
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
-from config import db
+from config import db, login_manager
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
 
 # Models go here!
-class User(db.Model, SerializerMixin):
+class User(db.Model, SerializerMixin, UserMixin):
     __tablename__ = "users"
 
     #________COLUMNS________#
@@ -19,6 +24,9 @@ class User(db.Model, SerializerMixin):
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     #________RELATIONSHIPS________#
     assigned_tickets = db.relationship("Ticket", foreign_keys="[Ticket.assignee_user_id]", back_populates="assignee")
