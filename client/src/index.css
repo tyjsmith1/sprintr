@@ -9,12 +9,12 @@
 }
 
 body {
-  /* background-image: linear-gradient(rgba(130, 61, 50, 0.98), rgba(6, 37, 68, 0.9));
+  background-image: linear-gradient(rgba(130, 61, 50, 0.98), rgba(6, 37, 68, 0.9));
   background-size: 100% 100%, 12px 12px, 12px 12px;
-  background-position: 0 0, 0 0, 6px 6px; */
-  background: url('./components/Assets/Num2grain.jpg') no-repeat fixed;
+  background-position: 0 0, 0 0, 6px 6px;
+  /* background: url('./components/Assets/Num2grain.jpg') no-repeat fixed;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
   min-height: 100vh;
   display: flex;
   align-items: center;

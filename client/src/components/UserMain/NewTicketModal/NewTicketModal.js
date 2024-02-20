@@ -168,18 +168,11 @@ function NewTicketModal({toggleNewTicketModal, users}) {
                             allOptionLabel="Please Choose..."
                             selectedValue={formData.assignedTo}
                         />
-                        {/* <label>Author: </label>
-                        <UserDropDownFilter 
-                            users={users}
-                            onUserSelection={handleUserSelection}
-                            allOptionLabel="Please Choose..."
-                            selectedValue={formData.author}
-                        /> */}
-                    <button className="submit-button" type="submit">SUBMIT</button>
+                        <div className="modal-footer">
+                            <button className="submit-button" type="submit">SUBMIT</button>
+                            <button className="close-button" type="button" onClick={startCloseModal}>CLOSE</button>
+                        </div>
                     </form>
-                <div className="modal-footer">
-                    <button className="close-button" type="button" onClick={startCloseModal}>CLOSE</button>
-                </div>
             </div>
             </div>
         </div>

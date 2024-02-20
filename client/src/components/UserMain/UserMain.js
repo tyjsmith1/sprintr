@@ -109,18 +109,20 @@ function UserMain() {
 
     return(
         <div>
-            <button
-                className="new-ticket-button"
-                onClick={toggleNewTicketModal}>
-                    <p className="p-add-icon"> <MdPlaylistAdd className="add-icon"/> Create New Ticket</p>
-            </button>
-            < UserDropDownFilter
-                className="user-drop-down"
-                onUserSelection={handleUserSelection} 
-                users={users}
-                allOptionLabel="All User Tickets"
-                selectedValue={selectedUserFilter}
-            />
+            <div className="user-drop-down-container">
+                <button
+                    className="new-ticket-button"
+                    onClick={toggleNewTicketModal}>
+                        <p className="p-add-icon"> <MdPlaylistAdd className="add-icon"/> Create New Ticket</p>
+                </button>
+                < UserDropDownFilter
+                    className="user-drop-down"
+                    onUserSelection={handleUserSelection} 
+                    users={users}
+                    allOptionLabel="All User Tickets"
+                    selectedValue={selectedUserFilter}
+                />
+            </div>
             <div className="ticket-category-container">
                 <div className="ticket-category">
                     <h2>To Do</h2>

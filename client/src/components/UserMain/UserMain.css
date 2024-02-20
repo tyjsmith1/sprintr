@@ -113,6 +113,13 @@
     transform: translateY(-2px);
 }
 
+.user-drop-down-container {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
 @media (max-width: 768px) {
     .ticket-category-container {
         flex-direction: column;

@@ -70,7 +70,6 @@
 
 label {
     display: block;
-    margin-bottom: 5px; 
     color: #EAEAEA;
 }
 
@@ -111,7 +110,10 @@ label {
 
 .input {
     background-color: #f5f5f5; 
-    color: #333333; 
+    color: #333333;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
 }
 
 .modal-content h1 {

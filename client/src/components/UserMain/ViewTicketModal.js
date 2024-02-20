@@ -118,7 +118,10 @@ function ViewTicketModal({ toggleViewTicketModal, selectedTicket, users }) {
                                         name="body"
                                         onChange={handleChange}
                                     ></textarea>
-                                    <button type="submit" className="submit-button">Submit Comment</button>
+                                    <div className="modal-footer">
+                                        <button type="submit" className="submit-button">Submit Comment</button>
+                                        <button type="button" className="close-button" onClick={startCloseModal}>Close</button>
+                                    </div>
                                 </form>
                             </div>
                         </>
@@ -126,10 +129,6 @@ function ViewTicketModal({ toggleViewTicketModal, selectedTicket, users }) {
                         <p>Loading ticket details...</p>
                         )
                     }
-                    <div className="modal-footer">
-                        {/* <button type="submit" className="submit-button">Submit Comment</button> */}
-                        <button className="close-button" onClick={startCloseModal}>Close</button>
-                    </div>
                 </div>
             </div>
         </div>
