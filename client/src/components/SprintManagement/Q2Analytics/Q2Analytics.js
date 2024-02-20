@@ -48,7 +48,7 @@ function Q2Analytics({incompleteTickets, completeTickets}) {
                             label += ': '
                         }
                         if (context.parsed.y !== null) {
-                            label += context.parsed.y
+                            label += context.parsed
                             label += chartOption === 'count' ? ' tickets' : ' story points'
                         }
                         return label
@@ -89,7 +89,7 @@ function Q2Analytics({incompleteTickets, completeTickets}) {
         <div>
             <h3>Analytics & Metrics</h3>
             <div>
-                <button onClick={() => setChartOption('count')}>Count</button>
+                <button onClick={() => setChartOption('count')}>Ticket Count</button>
                 <button onClick={() => setChartOption('storyPoints')}>Story Points</button>
             </div>
             <Pie data={chartData} options={options}/>

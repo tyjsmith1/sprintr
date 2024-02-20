@@ -55,7 +55,10 @@ function Q1SprintOptions() {
             },
             body: JSON.stringify({ completed_date: new Date().toISOString()})
         })
-        .then(() => fetchSprintDetails())
+        .then(() => {
+            fetchSprintDetails()
+        }
+        )
     }
 
     if (qOneIsLoading) {

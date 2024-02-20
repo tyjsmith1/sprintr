@@ -6,12 +6,19 @@ function Q3SprintTicketList({incompleteTickets,isLoading}) {
 
     useEffect(() => {
         function sortTickets(tickets){
+
+            const urgencyValues = {
+                low: 1,
+                med: 2,
+                high:3
+            }
+
             const ticketsCopy = [...tickets]
             return ticketsCopy.sort((a,b) => {
-                if (a.urgency === b.urgency) {
+                if (urgencyValues[a.urgency] === urgencyValues[b.urgency]) {
                     return b.story_points - a.story_points
                 }
-                return b.urgency - a.urgency
+                return urgencyValues[b.urgency] - urgencyValues[a.urgency]
             }).slice(0,10)            
         }
         
