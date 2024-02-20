@@ -10,7 +10,7 @@ from flask import Flask, request, make_response, jsonify, session, Response, ren
 from flask_restful import Resource
 from datetime import date
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 
 # Local imports
 from config import app, db, api
@@ -145,6 +145,9 @@ def tickets():
         )
 ####>>>>POST<<<<####
     elif request.method == 'POST':
+        if not current_user.is_authenticated:
+            return jsonify({"error": "Unauthorized"}), 401
+        
         form_data = request.get_json()
         new_ticket = Ticket(
             title = form_data['title'],
@@ -156,7 +159,7 @@ def tickets():
             created_at = date.today(),
             completed_at = None, ## This will be populated later by PUT
             assignee_user_id = form_data['assignee_user_id'],
-            author_user_id = form_data['author_user_id'], ## This will eventually be derived from session
+            author_user_id = current_user.id,
             sprint_id = form_data['sprint_id']
         )
         db.session.add(new_ticket)
@@ -336,7 +339,7 @@ def ticket_logs():
 
         new_ticket_log = TicketLog(
             ticket_id = form_data['ticket_id'],
-            author_user_id = form_data['author_user_id'],
+            author_user_id = current_user.id,
             comment_text = form_data['comment_text'],
             status = form_data['status'],
             created_at = date.today()

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./NewTicketModal.css"
 import UserDropDownFilter from "../UserDropDownFilter";
+import { useAuth } from '../../../AuthContext'
 
 function NewTicketModal({toggleNewTicketModal, users}) {
 
+    const { currentUser } = useAuth()
     const [isClosing, setIsClosing] = useState(false);
 
     const startCloseModal = () => {
@@ -21,7 +23,7 @@ function NewTicketModal({toggleNewTicketModal, users}) {
         storyPoints: 'DEFAULT',
         body: '',
         assignedTo: 'DEFAULT',
-        author: 'DEFAULT'
+        author: currentUser ? currentUser.id : 'DEFAULT'
     })
 
     function handleChange(e) {
@@ -42,7 +44,10 @@ function NewTicketModal({toggleNewTicketModal, users}) {
     function handleSubmit(e) {
         e.preventDefault()
 
-        const isEmpty = Object.values(formData).some(value => value.trim() === '');
+        const fieldExclusions = ['assignedTo', 'author', 'storyPoints', 'urgency', 'category', 'status'];
+        const isEmpty = Object.entries(formData).some(([key, value]) => {
+            return !fieldExclusions.includes(key) && value.trim() === ''
+        });
 
         if (isEmpty) {
             alert('Please fill out all fields.');
@@ -51,7 +56,8 @@ function NewTicketModal({toggleNewTicketModal, users}) {
         
         const ticketData = {
             assignee_user_id: formData.assignedTo,
-            author_user_id: formData.author,
+            // author_user_id: formData.author,
+            author_user_id: currentUser.id,
             body: formData.body,
             category: 'feature',
             completed_at: null,
@@ -162,13 +168,13 @@ function NewTicketModal({toggleNewTicketModal, users}) {
                             allOptionLabel="Please Choose..."
                             selectedValue={formData.assignedTo}
                         />
-                        <label>Author: </label>
+                        {/* <label>Author: </label>
                         <UserDropDownFilter 
                             users={users}
                             onUserSelection={handleUserSelection}
                             allOptionLabel="Please Choose..."
                             selectedValue={formData.author}
-                        />
+                        /> */}
                     <button className="submit-button" type="submit">SUBMIT</button>
                     </form>
                 <div className="modal-footer">
