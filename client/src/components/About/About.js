@@ -17,14 +17,14 @@ function About() {
                 <Sprint className="feature-svg"/>
                 <div className="feature-text">
                     <h2 className="about-heading">Real-Time Collaboration</h2>
-                    <p>Dive into the details with pop-up modals for each ticket. Leave comments, update statuses, and collaborate in real-time. Our platform fosters communication, making teamwork seamless and efficient.</p>
+                    <p className="about-p">Dive into the details with pop-up modals for each ticket. Leave comments, update statuses, and collaborate in real-time. Our platform fosters communication, making teamwork seamless and efficient.</p>
                 </div>
             </div>
 
             <div className="feature-section">
                 <div className="feature-text">
                     <h2 className="about-heading">Sprint Management Insights</h2>
-                    <p>Unlock the full potential of your sprints with our advanced sprint management features. Gain macro-level views of your sprint analytics to make data-driven decisions. Monitor the current sprint pace, estimate completion timelines, and get a detailed breakdown of progress by each engineer.</p>
+                    <p className="about-p">Unlock the full potential of your sprints with our advanced sprint management features. Gain macro-level views of your sprint analytics to make data-driven decisions. Monitor the current sprint pace, estimate completion timelines, and get a detailed breakdown of progress by each engineer.</p>
                 </div>
                 <Sprint4 className="feature-svg" />
             </div>
@@ -33,14 +33,14 @@ function About() {
                 <Sprint2 className="feature-svg" />
                 <div className="feature-text">
                     <h2 className="about-heading">Advanced Filtering and Assignment</h2>
-                    <p>Effortlessly filter tasks by assignee to focus on what's relevant. Our intuitive interface allows you to assign tickets with a few clicks, ensuring that every task is in capable hands.</p>
+                    <p className="about-p">Effortlessly filter tasks by assignee to focus on what's relevant. Our intuitive interface allows you to assign tickets with a few clicks, ensuring that every task is in capable hands.</p>
                 </div>
             </div>
 
             <div className="feature-section">
                 <div className="feature-text">
                     <h2 className="about-heading">Unified Task Management</h2>
-                    <p>Say goodbye to juggling multiple platforms. Our KanBan page offers a comprehensive view of all tasks, neatly categorized by status: To Do, In Progress, and Completed. Managing your projects has never been easier.</p>
+                    <p className="about-p">Say goodbye to juggling multiple platforms. Our KanBan page offers a comprehensive view of all tasks, neatly categorized by status: To Do, In Progress, and Completed. Managing your projects has never been easier.</p>
                 </div>
                 <Sprint3 className="feature-svg" />
             </div>

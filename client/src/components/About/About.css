@@ -4,12 +4,12 @@
     line-height: 1.6;
     max-width: 1200px;
     margin: 20px auto;
-    color: #fce0a8;
+    color: var(--text-color);
     border-radius: 8px;
 }
 
 .about-heading {
-    color: #f8ebd1;
+    color: var(--text-color);
     text-align: center;
     margin: 30px;
 }
@@ -21,12 +21,12 @@
     justify-content: space-around;
     margin: 40px 0;
     padding: 20px;
-    /* background: rgba(0, 0, 0, 0.2s); */
-    background-color: rgba(255,255,255,.2);
+    background-color: var(--feature-background);
     backdrop-filter: blur(10px);
     border-radius: 10px;
     max-height: 350px;
     min-height: auto;
+    box-shadow: var(--box-shadow);
 }
 
 .feature-svg {
@@ -38,9 +38,8 @@
 .feature-text {
     flex: 2;
     padding: 20px;
-    color: #fce0a8;
-    background: rgba(0, 0, 0, 0.5);
-    /* background-color: rgba(255,255,255,.2); */
+    color: var(--text-color);
+    background: var(--feature-text-background);
     backdrop-filter: blur(100px);
     border-radius: 10px;
 }
@@ -51,12 +50,12 @@
 }
 
 .about-list-item {
-    background: rgba(255,255,255,.2);
+    background: var(--feature-background);
     backdrop-filter: blur(36px);
     margin: 10px 0;
     padding: 15px;
     border-radius: 5px;
-    color: #fce0a8;
+    color: var(--feature-text-color);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 

@@ -132,7 +132,7 @@ function SignUp() {
                         <p className="error-message">{signupFormError.confirmPassword}</p>
                         <p className="success-message">{signupFormData.successMsg}</p>
                     </div>
-                    <button type="submit">Get Started!</button>
+                    <button className="login-btn" type="submit">Get Started!</button>
                 </form>
             </div>
         </div>

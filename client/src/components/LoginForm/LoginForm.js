@@ -14,20 +14,6 @@ function LoginForm(){
     async function handleLogin(e) {
         e.preventDefault()
         try {
-            // const response = await fetch('/login', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({username, password})
-            // })
-
-            // if (response.ok) {
-            //     navigate('/dashboard')
-            // } else {
-            //     const errorData = await response.json()
-            //     alert(`Login failed! ${errorData.message}`)
-            // }
             await login({ username, password })
             navigate('/dashboard')
         
