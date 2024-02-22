@@ -9,24 +9,26 @@
     margin: 0 10px;
     display: flex;
     flex-direction: column;
-    background-color: rgba(82, 82, 82, 0.1);
+    background-color: var(--ticket-category-background);
     backdrop-filter: blur(100px);
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: var(--ticket-container-shadow);
+    border: 1px solid var(--ticket-category-border);
     max-height: 600px;
     min-height: 500px;
     overflow: auto;
-    scrollbar-color: rgba(255, 255, 255, 0.1) rgba(0,0,0,0.1);
+    scrollbar-color: var(--ticket-scroll-bar);
     scrollbar-width: thin;
     width: 400px;
     min-width: 100px;
     max-width: 500px;
+    color: var(--text-color);
 }
 
 .ticket-category h2 {
     text-align: center;
+    color: var(--text-color);
 }
 
 .ticket-category ul {
@@ -39,27 +41,31 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: var(--ticket-li-background);
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
     font-size: 15px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255, 255, 255,0.1);
+    border: 1px solid var(--ticket-li-background);
+    color: var(--text-color);
 }
 
 .ticket-category h2,
 .ticket-category ul li,
 .trash,
 .new-ticket-button p,
-.add-icon {
-    transition: all 0.2s ease;
+.add-icon,
+.ticket-category,
+.ticket-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
+
 
 .trash {
     cursor: pointer;
     margin-left: 16px;
-    color: #757575;
+    color: var(--text-color);
     font-size: 24px;
 }
 
@@ -79,38 +85,32 @@
 
 .new-ticket-button:hover {
     text-decoration: underline;
+    color: var(--text-color);
 }
 
 .p-add-icon {
     display: flex ;
     align-items: center;
+    color: var(--text-color);
 }
 
 .add-icon {
     font-size: 20px;
+    color: var(--text-color);
 }
 
 .ticket-category-status {
     text-align: center;
 }
 
-.ticket-category {
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
-
-.ticket-category:hover,
-.ticket-item:hover {
-    /* transform: translateY(-2px); */
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    background-color: rgba(255,255,255,0.05);
-}
-
-.ticket-item {
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+.ticket-category:hover {
+    box-shadow: var(--ticket-cat-hover-shadow);
+    background-color: var(--ticket-cat-hover-color);
 }
 
 .ticket-item:hover {
     transform: translateY(-2px);
+    background-color: var(--ticket-li-background-hover);
 }
 
 .user-drop-down-container {
@@ -144,4 +144,17 @@
     .ticket-category {
         padding: 15px;
     }
+}
+
+.ticket-category::-webkit-scrollbar {
+    width: 10px;
+}
+
+.ticket-category::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1);
+}
+
+.ticket-category::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
 }

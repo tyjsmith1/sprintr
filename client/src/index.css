@@ -14,13 +14,21 @@
   --feature-background: rgba(255,255,255,.2); 
   --feature-text-background: rgba(237, 200, 175, 0.5);
   --feature-text-color: #fce0a8;
+  --ticket-li-background: rgba(241, 174, 152, 0.5);
+  --ticket-li-background-hover: var(--hover-button-color);
+  --ticket-container-shadow: var(--box-shadow);
+  --ticket-category-background: rgba(255, 255, 255, 0.5);
+  --ticket-category-border: var(--ticket-category-background);
+  --ticket-scroll-bar: rgba(255, 158, 158, 0.75) var(--text-color-contrast);
+  --ticket-cat-hover-color: rgb(255, 255, 255);
+  --ticket-cat-hover-shadow: 0 10px 40px rgba(0, 0, 0, .5);
 }
 
 /* ----- DARK MODE ----- */
 body.dark {
   --background-image: linear-gradient( 111.4deg,  rgb(56, 35, 35) 1%, rgb(4, 7, 27) 58% );
   --text-color: rgb(255, 232, 201);
-  --navbar-background-color: rgba(0, 0, 0, 0.85);
+  --navbar-background-color: rgba(0,6,19,0.85);
   --text-color-placeholder: rgba(255, 232, 201,0.5);
   --text-color-contrast: #232c4a;
   --box-shadow: 0 0 40px rgba(255, 123, 123, .7);
@@ -28,6 +36,14 @@ body.dark {
   --feature-background: rgba(0, 0, 0, 0.2); 
   --feature-text-background: rgba(234, 80, 80, 0.25);
   --feature-text-color: var(--text-color);
+  --ticket-li-background: rgba(85, 56, 56, .5);
+  --ticket-li-background-hover: rgba(183, 78, 78, 0.75);
+  --ticket-container-shadow: 0 0 10px rgb(255, 188, 188);
+  --ticket-category-background: var(--navbar-background-color);
+  --ticket-scroll-bar: rgba(255, 158, 158, 0.75) var(--navbar-background-color);
+  --ticket-category-border: rgba(174, 174, 174, 0.5);
+  --ticket-cat-hover-color: rgba(34, 34, 34, 0.5);
+  --ticket-cat-hover-shadow: 0 10px 40px rgba(255, 188, 188,.5);
 }
 
 * {

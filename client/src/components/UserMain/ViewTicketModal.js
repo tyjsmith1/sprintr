@@ -93,7 +93,7 @@ function ViewTicketModal({ toggleViewTicketModal, selectedTicket, users }) {
                     {ticketDetails ? (
                         <>
                             <div className="modal-header">
-                                <h1>{ticketDetails.title}</h1>
+                                <h2>{ticketDetails.title}</h2>
                             </div>
                             <div className="modal-body">
                                 <p className="ticket-body">{ticketDetails.body}</p>

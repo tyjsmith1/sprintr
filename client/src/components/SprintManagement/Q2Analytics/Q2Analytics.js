@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react"
 import { Pie } from 'react-chartjs-2'
 import Chart from 'chart.js/auto'
+import { useTheme } from '../../ThemeContext'
 
 Chart.defaults.color = "#f7f1cb";
 
 function Q2Analytics({incompleteTickets, completeTickets}) {
+    const { theme } = useTheme()
+    const textColor = theme === 'light' ? 'rgba(0,6,19)' : 'rgb(255, 232, 201)';
+
+    const colors = theme === 'light' ? {
+        complete: 'rgba(0, 100, 255, .85)',
+        incomplete: 'rgba(224, 106, 106, .85)',
+    } : {
+        complete: 'rgba(0, 234, 255, 1)',
+        incomplete: 'rgba(255, 83, 83, 1)',
+    }
+
     const [chartData, setChartData] = useState({
         labels: [],
         datasets: [{
@@ -22,6 +34,7 @@ function Q2Analytics({incompleteTickets, completeTickets}) {
             legend: {
                 position: 'top',
                 labels: {
+                    color: textColor,
                     padding: 5,
                     font: {
                         size: 14
@@ -31,6 +44,7 @@ function Q2Analytics({incompleteTickets, completeTickets}) {
             title: {
                 display: true,
                 text: 'Ticket Completion Status',
+                color: textColor,
                 padding: {
                     top: 10,
                     bottom: 0
@@ -69,12 +83,12 @@ function Q2Analytics({incompleteTickets, completeTickets}) {
                         incompleteTickets.reduce((acc,ticket) => acc + ticket.story_points, 0)
                     ],
                 backgroundColor: [
-                    'rgba(7, 155, 190, 0.75)',
-                    'rgba(255, 57, 42, 0.75)'
+                    colors.complete,
+                    colors.incomplete
                 ],
                 borderColor: [
-                    'rgba(7, 155, 190, 1)',
-                    'rgba(255, 57, 42, 1)'
+                    colors.complete,
+                    colors.incomplete
                 ],
                 borderWidth: 1,
                 hoverOffset: 10,
@@ -83,7 +97,7 @@ function Q2Analytics({incompleteTickets, completeTickets}) {
         }
 
         setChartData(data)
-    },[incompleteTickets, completeTickets, chartOption])
+    },[incompleteTickets, completeTickets, chartOption, theme])
 
     return (
         <div>

@@ -19,18 +19,19 @@
     align-items: start;
     padding: 10px;
     border-radius: 5px;
-    background-color: rgba(82, 82, 82, 0.1);
+    background-color: var(--ticket-category-background);
     backdrop-filter: blur(100px);
     border-radius: 10px;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow: var(--ticket-container-shadow);
+    border: var(--ticket-category-background);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    color: var(--text-color);
 }
 
 .Q1-container:hover, .Q2-container:hover, .Q3-container:hover, .Q4-container:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    background-color: rgba(255,255,255,0.1);
+    box-shadow: var(--ticket-cat-hover-shadow);
+    background-color: var(--ticket-cat-hover-color);
 }
 
 .Q1-container .content, .Q2-container .content, .Q3-container .content, .Q4-container .content {
@@ -66,12 +67,6 @@
 
 .Q1-container button:hover {
     background-color: #0056b3;
-}
-
-.Q1-container div {
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #333;
 }
 
 .Q1-container .q1-analytics {
