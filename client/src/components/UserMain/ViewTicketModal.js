@@ -29,14 +29,16 @@ function ViewTicketModal({ toggleViewTicketModal, selectedTicket, users }) {
 
     useEffect(()=>{
         if (selectedTicket && selectedTicket.id) {
+            console.log('Fetching ticket details for:', selectedTicket.id)
             fetch(`/tickets/${selectedTicket.id}`)
             .then(response => response.json())
             .then(ticketData => {
+                console.log('Ticket data received:', ticketData);
                 setTicketDetails(ticketData)
-            
-            fetchComments()
-        })}
-    },[selectedTicket])
+                fetchComments()
+            })
+            .catch(error => console.error('Fetching error:', error));
+    }},[selectedTicket])
 
     function handleAssignmentChange(userId){
 
@@ -102,7 +104,7 @@ function ViewTicketModal({ toggleViewTicketModal, selectedTicket, users }) {
                                     <UserDropDownFilter 
                                         onUserSelection={handleAssignmentChange}
                                         users={users}
-                                        selectedValue={ticketDetails.assignee_user_id.toString()}
+                                        selectedValue={ticketDetails.assignee_user_id ? ticketDetails.assignee_user_id.toString() : ''}
                                         allOptionLabel="Select User"
                                     />
                                     <p>Urgency: <span className={`urgency ${ticketDetails.urgency}`}>{ticketDetails.urgency}</span></p>

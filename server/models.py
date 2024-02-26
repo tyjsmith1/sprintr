@@ -27,6 +27,10 @@ class User(db.Model, SerializerMixin, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def calculate_current_load(self):
+        active_tickets = Ticket.query.filter(Ticket.assignee_user_id==self.id, Ticket.status != 'complete')
+        return sum(ticket.story_points for ticket in active_tickets)
 
     #________RELATIONSHIPS________#
     assigned_tickets = db.relationship("Ticket", foreign_keys="[Ticket.assignee_user_id]", back_populates="assignee")

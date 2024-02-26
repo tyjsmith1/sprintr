@@ -44,9 +44,12 @@ function NewTicketModal({toggleNewTicketModal, users}) {
     function handleSubmit(e) {
         e.preventDefault()
 
-        const fieldExclusions = ['assignedTo', 'author', 'storyPoints', 'urgency', 'category', 'status'];
         const isEmpty = Object.entries(formData).some(([key, value]) => {
-            return !fieldExclusions.includes(key) && value.trim() === ''
+            if (typeof value === 'string' && key !== 'assignedTo' && key !== 'author' && key !== 'storyPoints') {
+                return value.trim() === '' || value === 'DEFAULT'
+            } else {
+                return value === 'DEFAULT'
+            }
         });
 
         if (isEmpty) {
@@ -54,21 +57,48 @@ function NewTicketModal({toggleNewTicketModal, users}) {
             return; 
         }
         
-        const ticketData = {
-            assignee_user_id: formData.assignedTo,
-            // author_user_id: formData.author,
+        let commonTicketData = {
+            // assignee_user_id: formData.assignedTo,
             author_user_id: currentUser.id,
             body: formData.body,
-            category: 'feature',
-            completed_at: null,
-            created_at: new Date().toISOString().split('T')[0],
+            category: formData.category,
+            // completed_at: null,
+            // created_at: new Date().toISOString().split('T')[0],
             sprint_id: 1,
             status: formData.status,
-            story_points: formData.storyPoints,
+            story_points: parseInt(formData.storyPoints,10),
             title: formData.title,
             urgency: formData.urgency
         }
 
+        if (formData.assignedTo === 'auto-assign') {
+            console.log("Submitting for auto-assignment:", commonTicketData)
+            fetch('/tickets/auto-assign', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    category: commonTicketData.category,
+                    story_points: commonTicketData.story_points,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received Auto-Assign", data)
+                commonTicketData.assignee_user_id = data.assignee_user_id
+                submitTicket(commonTicketData)
+                console.log("Successful Ticket Auto-Assign creation", commonTicketData)
+            })
+            .catch(error => {
+                console.error("Error during auto-assignment: ", error)
+            });
+        } else {
+            commonTicketData.assignee_user_id = formData.assignedTo
+            submitTicket(commonTicketData)
+        }
+    
+    function submitTicket(ticketData) {
         fetch('/tickets', {
             method: "POST",
             headers: {
@@ -81,6 +111,9 @@ function NewTicketModal({toggleNewTicketModal, users}) {
             console.log("success: ", data)
             toggleNewTicketModal()
         })
+        
+    }
+
     }
 
     return(
@@ -96,7 +129,7 @@ function NewTicketModal({toggleNewTicketModal, users}) {
                         <input 
                             className="input"
                             type="text"
-                            placeholder="Ticket Title"
+                            placeholder="Ticket Title" 
                             value={formData.title}
                             name="title"
                             onChange={handleChange}
@@ -167,6 +200,7 @@ function NewTicketModal({toggleNewTicketModal, users}) {
                             onUserSelection={handleUserSelection}
                             allOptionLabel="Please Choose..."
                             selectedValue={formData.assignedTo}
+                            showAutoAssignOption={true}
                         />
                         <div className="modal-footer">
                             <button className="submit-button" type="submit">SUBMIT</button>

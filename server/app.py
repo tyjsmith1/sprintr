@@ -27,6 +27,7 @@ def index():
 @app.route('/users', methods = ['GET','POST'])
 @login_required
 def get_users():
+    res = make_response(jsonify({"error": "Method not allowed"}), 405)
 ####>>>>GET<<<<####
     if request.method == 'GET':
         users = User.query.all()
@@ -176,6 +177,7 @@ def tickets():
 @app.route('/tickets/<int:id>', methods=['GET','DELETE','PATCH'])
 @login_required
 def ticket_by_id(id):
+    res = make_response(jsonify({"error": "Unhandled method or no data found"}), 400)
 ####>>>>GET<<<<####
     if request.method == 'GET':
         ticket_details = Ticket.query.join(
@@ -231,6 +233,28 @@ def ticket_by_id(id):
                 400
             )
     return res
+
+####>>>>AUTO ASSIGN FEATURE<<<<####
+@app.route('/tickets/auto-assign', methods=['POST'])
+@login_required
+def auto_assign_ticket():
+    data = request.get_json()
+    category = data.get('category')
+
+    eligible_users = User.query.filter_by(role=category).all()
+    min_load = float('inf')
+    best_user = None
+
+    for user in eligible_users:
+        load = user.calculate_current_load()
+        if load < min_load and load + data.get('story_points',0) <= user.user_capacity:
+            min_load = load
+            best_user = user
+    
+    if best_user:
+        return jsonify({"assignee_user_id": best_user.id}), 200
+    else:
+        return jsonify({"error": "No suitable user found"}), 404
 
 ## _______________ Sprint ROUTES _______________ ##
 @app.route('/sprints', methods=['GET','POST'])

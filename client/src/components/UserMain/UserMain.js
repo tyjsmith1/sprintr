@@ -51,13 +51,12 @@ function UserMain() {
     }
 
     function loadTickets(){
-
-        fetch('/tickets')
-        .then(response => response.json())
-        .then(data => {
-            setAllTickets(data)
-            categorizeTickets(data)
-        })
+            fetch('/tickets')
+            .then(response => response.json())
+            .then(data => {
+                setAllTickets(data)
+                categorizeTickets(data)
+            })
     }
 
     useEffect(() => {
