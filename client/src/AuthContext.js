@@ -10,25 +10,28 @@ export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(null)
 
     const login = async (userCredentials) => {
-        try {
-            const response = await fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userCredentials)
-            })
+        return new Promise(async (resolve,reject) => {
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userCredentials)
+                })
         
-        if (!response.ok) {
-            throw new Error('Failed to login')
-        }
+                if (!response.ok) {
+                    throw new Error('Failed to login')
+                }
 
-        const user = await response.json()
-        setCurrentUser(user)
-        } catch(error) {
-            console.error("Login error: ", error)
-            throw error
-        }
+                const user = await response.json()
+                setCurrentUser(user)
+                resolve(user)
+            } catch(error) {
+                console.error("Login error: ", error)
+                reject(error)
+            }
+        })
     }
 
     const logout = () => {
