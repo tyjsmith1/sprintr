@@ -11,6 +11,7 @@ from flask_restful import Resource
 from datetime import date
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
+from sqlalchemy.exc import SQLAlchemyError
 
 # Local imports
 from config import app, db, api
@@ -294,7 +295,7 @@ def sprints_by_id(id):
     sprint = Sprint.query.filter(Sprint.id == id).first()
 ####>>>>GET_SINGLE<<<<####  
     if request.method == 'GET':
-        sprint_body = sprint.to_dict()
+        sprint_body = sprint.to_dict(only=('id','start_date','end_date'))
         res = make_response(
             sprint_body,
             200
@@ -305,12 +306,13 @@ def sprints_by_id(id):
             sprint.end_date = date.today()
 
             db.session.commit()
-            sprint_body = sprint.to_dict()
+            sprint_body = sprint.to_dict(only=('id','start_date','end_date'))
             res = make_response(
                 sprint_body,
                 200
             )
-        except ValueError:
+        except SQLAlchemyError as e:
+            db.session.rollback()
             res = make_response(
                 { 'errors': ['validation errors'] },
                 400
