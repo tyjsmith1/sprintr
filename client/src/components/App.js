@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+import { SprintProvider } from "./SprintContext";
 
 //imported components
 import LoginForm from "./LoginForm/LoginForm";
@@ -35,7 +36,9 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <RouterProvider router={router}/>
+        <SprintProvider>
+          <RouterProvider router={router}/>
+        </SprintProvider>
       </AuthProvider>
     </ThemeProvider>
   )

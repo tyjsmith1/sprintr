@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import '../SprintManagement.css'
 import Modal from './Modal'
+import { useSprint } from '../../SprintContext'
 
 function Q1SprintOptions() {
     const [currentSprint, setCurrentSprint] = useState(null)
+    const {currentSprintId, setCurrentSprintId } = useSprint()
     const [qOneIsLoading, setqOneIsLoading] = useState(true)
     const [currentPace, setCurrentPace] = useState(0)
     const [estDaysRemaining, setEstDaysRemaining] = useState(0)
@@ -21,12 +23,15 @@ function Q1SprintOptions() {
         .then(sprints => {
             const activeSprint = sprints.find(sprint => sprint.end_date === null)
             setCurrentSprint(activeSprint || null)
+            if (activeSprint) {
+                setCurrentSprintId(activeSprint.id)
+                fetchAnalytics(activeSprint.id)
+            }
             setqOneIsLoading(false)
-            if (activeSprint) fetchAnalytics(activeSprint.id)
         })
     }
 
-    function fetchAnalytics(sprint_id){
+    function fetchAnalytics(sprint_id) {
         fetch(`/sprints/${sprint_id}/analytics`)
         .then(response => response.json())
         .then(data => {
@@ -36,49 +41,54 @@ function Q1SprintOptions() {
         })
     }
 
-    function createSprint() {
-        fetch('/sprints', {
+    async function closeCurrentSprint() {
+        if (!currentSprint) return
+        const completedDate = new Date().toISOString()
+        await fetch(`/sprints/${currentSprint.id}`, {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({completed_date: completedDate})
+        })
+    }
+
+    async function createNewSprint() {
+        const response = await fetch('/sprints', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify()
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({ start_date: new Date().toISOString(), end_date: null })
         })
-        .then(() => {
-            migrateUnfinishedTickets()
+        const newSprint = await response.json()
+        setCurrentSprintId(newSprint.id)
+        return newSprint.id
+    }
+
+    async function migrateUnfinishedTickets(newSprintId) {
+        console.log(`New Sprint ID: ${newSprintId};\nOld Sprint ID: ${currentSprint.id}`)
+        await fetch(`/sprints/${currentSprint.id}/migrate-tickets/${newSprintId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json'},
+        })
+    }
+
+    async function handleSprintClosure() {
+        try {
+            await closeCurrentSprint()
+            const newSprintId = await createNewSprint()
+            await migrateUnfinishedTickets(newSprintId)
             fetchSprintDetails()
-        })
+        } catch (error) {
+            console.error("Error during sprint closure process: ", error)
+        }
+    }
+
+    function handleSprintClosureConfirmation() {
+        setShowModal(false)
+        handleSprintClosure()
     }
 
     function popModal(e) {
         e.preventDefault()
         setShowModal(true)
-    }
-
-    function handleSprintClosureConfirmation() {
-        if (!currentSprint) return
-
-        console.log(currentSprint.id)
-
-        fetch(`/sprints/${currentSprint.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify()
-            // { completed_date: new Date().toISOString()}
-        })
-        .then(() => {
-            createSprint()
-            setShowModal(false)
-        })
-        .catch(error => {
-            console.error("Error closing sprint: ", error)
-        })
-    }
-
-    function migrateUnfinishedTickets() {
-        console.log("Ticket <> Sprint migration triggered")
     }
 
     if (qOneIsLoading) {
@@ -107,7 +117,7 @@ function Q1SprintOptions() {
                     </div>
                 </div>
             ) : (
-                <button onClick={createSprint}>Create New Sprint</button>
+                <button onClick={createNewSprint}>Create New Sprint</button>
             )}
         </div>
     )

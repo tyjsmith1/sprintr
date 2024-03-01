@@ -12,6 +12,7 @@ from datetime import date
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import and_
 
 # Local imports
 from config import app, db, api
@@ -24,7 +25,10 @@ from models import db, User, Ticket, TicketContributor, TicketLog, Sprint
 def index():
     return '<h1>Project Server</h1>'
 
-## _______________ USER ROUTES _______________ ##
+###################################
+#          USER ROUTES            #
+###################################
+
 @app.route('/users', methods = ['GET','POST'])
 @login_required
 def get_users():
@@ -104,12 +108,6 @@ def users_by_id(id):
             )
     return res
 
-#########################################################
-#                                                       #
-#                   DEMO SECTION                        #
-#                                                       #
-#########################################################
-
 ####>>>>LOGIN -- POST<<<<####   
 @app.route('/login', methods=['POST'])
 def login():
@@ -131,7 +129,10 @@ def logout():
     logout_user()
     return jsonify({"message": "You have been logged out."}), 200
 
-## _______________ Ticket ROUTES _______________ ##
+###################################
+#          TICKET ROUTES          #
+###################################
+
 @app.route('/tickets', methods=['GET','POST'])
 @login_required
 def tickets():
@@ -176,7 +177,7 @@ def tickets():
     return res
 
 @app.route('/tickets/<int:id>', methods=['GET','DELETE','PATCH'])
-@login_required
+# @login_required
 def ticket_by_id(id):
     res = make_response(jsonify({"error": "Unhandled method or no data found"}), 400)
 ####>>>>GET<<<<####
@@ -257,7 +258,21 @@ def auto_assign_ticket():
     else:
         return jsonify({"error": "No suitable user found"}), 404
 
-## _______________ Sprint ROUTES _______________ ##
+###################################
+#          SPRINT ROUTES          #
+###################################
+    
+###>>> Get Current Sprint <<<###
+@app.route('/sprints/current')
+@login_required
+def get_current_sprint():
+    active_sprint = Sprint.query.filter(Sprint.end_date == None).first()
+    if active_sprint:
+        response = jsonify({"active_sprint_id": active_sprint.id})
+    else:
+        response = jsonify({"error": "No active sprint found"})
+    return response
+
 @app.route('/sprints', methods=['GET','POST'])
 @login_required
 def sprints():
@@ -329,12 +344,22 @@ def sprints_by_id(id):
     
     return res
 
-#########################################################
-#                                                       #
-#                   DEMO SECTION                        #
-#                                                       #
-#########################################################
-
+@app.route('/sprints/<int:old_sprint_id>/migrate-tickets/<int:new_sprint_id>',methods=['PATCH'])
+def migrate_tickets(old_sprint_id, new_sprint_id):
+    try:
+        Ticket.query.filter(and_(Ticket.sprint_id == old_sprint_id, Ticket.status !='complete')).update({'sprint_id': new_sprint_id})
+        db.session.commit()
+    
+        migrated_tickets = Ticket.query.filter_by(sprint_id=new_sprint_id).all()
+        migrated_tickets_body = [ticket.to_dict(only=('id','sprint_id')) for ticket in migrated_tickets]
+        res = make_response(
+                migrated_tickets_body,
+                200
+            )
+    except Exception as e:
+        db.session.rollback()
+        res = make_response({'errors': str(e)}, 500)
+    return res
 
 ####>>>>ANALYTICS<<<<####
 @app.route('/sprints/<int:sprint_id>/analytics', methods=['GET'])
@@ -347,7 +372,9 @@ def get_sprint_analytics(sprint_id):
 
     return jsonify(analytics)
 
-## _______________ TicketLog ROUTES _______________ ##
+###################################
+#        TICKET LOG ROUTES        #
+###################################
 @app.route('/ticket-logs',methods=['GET','POST'])
 @login_required
 def ticket_logs():
@@ -417,7 +444,9 @@ def ticket_log_by_id(id):
 
     return res
 
-## _______________ TicketContributors ROUTES _______________ ##
+###################################
+#    TICKET CONTRIBUTOR ROUTES    #
+###################################
 @app.route('/ticket-contributors', methods=['GET','POST'])
 @login_required
 def ticket_contributors():
@@ -463,14 +492,9 @@ def contributors_by_id(id):
     )
     return res
 
-#########################################################
-#                                                       #
-#                   DEMO SECTION                        #
-#                                                       #
-#########################################################
-
-
-## _______________ Analytics ROUTES _______________ ##
+###################################
+#        ANALYTICS ROUTES         #
+###################################
 @app.route('/contributor-data')
 @login_required
 def get_contributor_data():

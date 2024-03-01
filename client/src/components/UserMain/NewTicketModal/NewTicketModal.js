@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./NewTicketModal.css"
 import UserDropDownFilter from "../UserDropDownFilter";
 import { useAuth } from '../../../AuthContext'
+import { useSprint } from '../../SprintContext'
 
 function NewTicketModal({toggleNewTicketModal, users}) {
-
+    const { currentSprintId } = useSprint()
     const { currentUser } = useAuth()
     const [isClosing, setIsClosing] = useState(false);
 
@@ -58,13 +59,10 @@ function NewTicketModal({toggleNewTicketModal, users}) {
         }
         
         let commonTicketData = {
-            // assignee_user_id: formData.assignedTo,
             author_user_id: currentUser.id,
             body: formData.body,
             category: formData.category,
-            // completed_at: null,
-            // created_at: new Date().toISOString().split('T')[0],
-            sprint_id: 1,
+            sprint_id: currentSprintId,
             status: formData.status,
             story_points: parseInt(formData.storyPoints,10),
             title: formData.title,

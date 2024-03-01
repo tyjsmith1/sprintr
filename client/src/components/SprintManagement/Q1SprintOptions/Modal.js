@@ -3,13 +3,13 @@ import './Modal.css'
 
 function Modal({ title, children, onCancel, onConfirm}) {
     return (
-        <div className="modal-backdrop">
-            <div className="modal-content">
+        <div id="modal-backdrop">
+            <div id="modal-content">
                 <h2>{title}</h2>
-                <div className="modal-body">
+                <div id="modal-body">
                     {children}
                 </div>
-                <div className="modal-actions">
+                <div id="modal-actions">
                     <button onClick={onCancel} id="btn-cancel">Cancel</button>
                     <button onClick={onConfirm} id="btn-confirm">Confirm</button>
                 </div>
