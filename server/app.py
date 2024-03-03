@@ -498,7 +498,13 @@ def contributors_by_id(id):
 @app.route('/contributor-data')
 @login_required
 def get_contributor_data():
-    joined_data = db.session.query(Ticket, User).join(User, Ticket.assignee_user_id == User.id).all()
+    current_sprint_id = db.session.query(Sprint.id).filter(Sprint.end_date.is_(None)).scalar()
+    joined_data = db.session.query(Ticket, User)\
+        .join(User, Ticket.assignee_user_id == User.id)\
+        .join(Sprint, Ticket.sprint_id == Sprint.id)\
+        .filter(Sprint.id == current_sprint_id)\
+        .all()
+
     result = []
     for ticket, user in joined_data:
         result.append({
